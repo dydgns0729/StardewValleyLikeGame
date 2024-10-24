@@ -33,12 +33,12 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
         // 입력값을 받습니다.
-        float horizontal = Input.GetAxis("Horizontal"); // 왼쪽/오른쪽 방향 입력 (A/D 키 또는 화살표)
-        float vertical = Input.GetAxis("Vertical"); // 위/아래 방향 입력 (W/S 키 또는 화살표)
+        float horizontal = Input.GetAxisRaw("Horizontal"); // 왼쪽/오른쪽 방향 입력 (A/D 키 또는 화살표)
+        float vertical = Input.GetAxisRaw("Vertical"); // 위/아래 방향 입력 (W/S 키 또는 화살표)
 
         // 입력에 따른 이동 벡터를 설정합니다.
         motionVector = new Vector2(horizontal, vertical);
-
+        //motionVector = motionVector.normalized * Mathf.Min(motionVector.magnitude, 1f) * speed;
         // 대각선 이동 시 빠른 속도 증가를 막기 위해 입력값을 클램프
         // 속도의 크기를 최대 1로 제한 (정규화 대신 크기 비율을 맞춰줌)
         motionVector = Vector2.ClampMagnitude(motionVector, 1f);

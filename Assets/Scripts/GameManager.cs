@@ -1,83 +1,29 @@
 using UnityEngine;
 
-/// <summary>
-/// Singleton<T> Å¬·¡½º´Â Á¦³×¸¯ Å¸ÀÔ T¿¡ ´ëÇØ ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ Á¦°øÇÏ´Â ±âº» Å¬·¡½ºÀÔ´Ï´Ù.
-/// T´Â MonoBehaviour¸¦ »ó¼Ó¹Ş´Â Å¸ÀÔÀÌ¾î¾ß ÇÕ´Ï´Ù.
-/// </summary>
-/// <typeparam name="T">MonoBehaviour¸¦ »ó¼Ó¹Ş´Â Á¦³×¸¯ Å¸ÀÔ</typeparam>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace MyStardewValleylikeGame
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ ÀúÀåÇÒ º¯¼ö
-    private static T _instance;
-
-    // ½º·¹µå µ¿±âÈ­¸¦ À§ÇÑ Àá±İ °´Ã¼
-    private static readonly object _lock = new object();
-
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ÇÃ·¡±×
-    private static bool _applicationIsQuitting = false;
-
-    /// <summary>
-    /// ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¿¡ Á¢±ÙÇÏ´Â ÇÁ·ÎÆÛÆ¼
-    /// </summary>
-    public static T Instance
+    public class GameManager : MonoBehaviour
     {
-        get
+        #region Variables
+        // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
+        public static GameManager Instance { get; private set; }
+
+        // Player ì˜¤ë¸Œì íŠ¸ë¥¼ publicìœ¼ë¡œ ì„ ì–¸í•˜ì—¬ ì¸ìŠ¤í™í„°ì—ì„œ ì§ì ‘ í• ë‹¹ ê°€ëŠ¥
+        public GameObject player;
+        #endregion
+
+        private void Awake()
         {
-            if (_applicationIsQuitting)
+            // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ ì´ˆê¸°í™”
+            if (Instance == null)
             {
-                Debug.LogWarning("[Singleton] Application is quitting. Returning null.");
-                return null;
+                Instance = this;
+                DontDestroyOnLoad(gameObject); // ì”¬ ì „í™˜ ì‹œì—ë„ GameManager ìœ ì§€
             }
-
-            lock (_lock) // ½º·¹µå ¾ÈÀü¼ºÀ» º¸ÀåÇÏ±â À§ÇØ lock »ç¿ë
+            else
             {
-                if (_instance == null)
-                {
-                    // ¸ÕÀú ÀÎ½ºÅÏ½º¸¦ Ã£¾Æº½
-                    _instance = FindObjectOfType<T>();
-
-                    // ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é »õ·Î »ı¼º
-                    if (_instance == null)
-                    {
-                        // »õ °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ¸¸µé°í ±× ¾È¿¡ ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ Ãß°¡
-                        GameObject singletonObject = new GameObject();
-                        _instance = singletonObject.AddComponent<T>();
-                        singletonObject.name = typeof(T).ToString() + " (Singleton)";
-
-                        // ½Ì±ÛÅæ °´Ã¼°¡ ¾À ÀüÈ¯ ½Ã ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤
-                        DontDestroyOnLoad(singletonObject);
-
-                        Debug.Log("[Singleton] An instance of " + typeof(T) +
-                            " is needed in the scene, so '" + singletonObject +
-                            "' was created with DontDestroyOnLoad.");
-                    }
-                    else
-                    {
-                        Debug.Log("[Singleton] Using instance already created: " + _instance.gameObject.name);
-                    }
-                }
-
-                return _instance;
+                Destroy(gameObject); // ì´ë¯¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ì¡´ì¬í•˜ë©´ ìƒˆë¡œìš´ ê°ì²´ë¥¼ ì‚­ì œ
             }
         }
-    }
-    /// <summary>
-    /// ¾îÇÃ¸®ÄÉÀÌ¼ÇÀÌ Á¾·áµÉ ¶§ È£ÃâµÇ´Â ¸Ş¼­µå
-    /// </summary>
-    protected virtual void OnDestroy()
-    {
-        _applicationIsQuitting = true;
-    }
-}
-
-
-public class GameManager : Singleton<GameManager>
-{
-    public int score;
-
-    // GameManager¸¸ÀÇ ±â´É Ãß°¡ °¡´É
-    public void AddScore(int value)
-    {
-        score += value;
     }
 }

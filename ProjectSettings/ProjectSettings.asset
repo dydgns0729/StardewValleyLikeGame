@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 0c0c2205884e25440abb7270215e1d63
+  productGUID: a272e263025317148b61edf5e7a1b79c
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: StardewValleyLikeGame
+  productName: TestStartdew
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -687,14 +687,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: StardewValleyLikeGame
+  metroPackageName: TestStartdew
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: StardewValleyLikeGame
+  metroApplicationDescription: TestStartdew
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -763,10 +763,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 06107764-7a07-45fa-b9af-89d11f248660
+  cloudProjectId: a76918a7-8b04-4128-83a7-3630328df020
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: StardewValleyLikeGame
+  projectName: TestStartdew
   organizationId: toneed
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

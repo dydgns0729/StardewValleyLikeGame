@@ -2801,14 +2801,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b38861851c09741982a7f50ad7e11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeScale: 3600
+  nightLightColor: {r: 0, g: 0.015686275, b: 0.21568628, a: 1}
+  dayLightColor: {r: 1, g: 1, b: 1, a: 1}
+  nightTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5
+      value: 1
+      inSlope: -0.0019360435
+      outSlope: -0.0019360435
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.7241268
+    - serializedVersion: 3
+      time: 6.5
+      value: 0
+      inSlope: -0.006522716
+      outSlope: -0.006522716
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12571205
+    - serializedVersion: 3
+      time: 18
+      value: 0
+      inSlope: -0.0077425726
+      outSlope: -0.0077425726
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 19
+      value: 1
+      inSlope: -0.0018188963
+      outSlope: -0.0018188963
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2312294
+    - serializedVersion: 3
+      time: 24
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 0
+    m_RotationOrder: 4
+  text: {fileID: 1744078012}
   globalLight: {fileID: 619394801}
-  timeOfDay: 12
-  cycleSpeed: 1
-  dayColor: {r: 1, g: 1, b: 1, a: 1}
-  nightColor: {r: 0.1, g: 0.1, b: 0.5, a: 1}
-  dayIntensity: 1
-  nightIntensity: 0.2
-  debugText: {fileID: 1744078012}
+  days: 0
 --- !u!1 &1528543700
 GameObject:
   m_ObjectHideFlags: 0

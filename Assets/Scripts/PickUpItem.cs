@@ -13,6 +13,11 @@ namespace MyStardewValleylikeGame
         [SerializeField] float pickUpDistance = 1.5f;
         //이 오브젝트가 존재하는 시간
         [SerializeField] float timeToLive = 10f;
+
+        //제공할 아이템
+        public Item item;
+        //아이템의 개수(기본 1)
+        public int count = 1;
         #endregion
 
         private void Awake()
@@ -39,7 +44,17 @@ namespace MyStardewValleylikeGame
             //0.1보다 거리가 작아지면 파괴
             if (distance < 0.1f)
             {
-                Destroy(gameObject);
+                //인벤토리가 있는지 확인
+                if (GameManager.Instance.inventoryContainer != null)
+                {
+                    //인벤토리에 아이템 추가
+                    GameManager.Instance.inventoryContainer.Add(item, count);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Debug.LogWarning("GameManager의 inventoryContainer가 비어있습니다.");
+                }
             }
 
         }

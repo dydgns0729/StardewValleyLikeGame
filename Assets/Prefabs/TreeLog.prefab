@@ -100,3 +100,5 @@ MonoBehaviour:
   speed: 5
   pickUpDistance: 1.5
   timeToLive: 10
+  item: {fileID: 11400000, guid: ec855a971611d444ba966367e0a44a4d, type: 2}
+  count: 1

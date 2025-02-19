@@ -38,7 +38,7 @@ namespace MyStardewValleylikeGame
         }
 
         // UI를 갱신하여 인벤토리 데이터를 반영하는 함수
-        private void Show()
+        public void Show()
         {
             for (int i = 0; i < inventory.slots.Count; i++)
             {

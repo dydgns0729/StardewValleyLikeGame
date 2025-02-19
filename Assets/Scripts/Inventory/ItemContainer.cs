@@ -11,11 +11,19 @@ namespace MyStardewValleylikeGame
     {
         public Item item;  // 현재 슬롯에 저장된 아이템
         public int count;  // 해당 아이템의 개수 (스택 가능할 경우 사용)
+
         //아이템 슬롯에 정보를 복사하는 함수
         public void Copy(ItemSlot itemSlot)
         {
             item = itemSlot.item;
             count = itemSlot.count;
+        }
+
+        //아이템 슬롯에 아이템과 개수를 설정하는 함수
+        public void Set(Item item, int count)
+        {
+            this.item = item;
+            this.count = count;
         }
 
         //아이템 슬롯을 초기화하는 함수

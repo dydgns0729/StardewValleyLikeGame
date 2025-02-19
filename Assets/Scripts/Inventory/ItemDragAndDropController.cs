@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MyStardewValleylikeGame
@@ -19,7 +20,17 @@ namespace MyStardewValleylikeGame
 
         private void Update()
         {
-            iconTransform.position = Input.mousePosition;
+
+            if (itemIcon.activeInHierarchy)
+            {
+                iconTransform.position = Input.mousePosition;
+
+                //UI창을 벗어나있는 상태로 클릭하면 아이템을 삭제한다.
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                {
+                    Debug.Log("UI창을 벗어났습니다.");
+                }
+            }
         }
 
         public void OnClick(ItemSlot itemSlot)

@@ -12,10 +12,6 @@ namespace MyStardewValleylikeGame
         {
             get
             {
-                if (instance == null)
-                {
-                    throw new System.NullReferenceException($"Singleton instance of {typeof(T)} is not initialized.");
-                }
                 return instance;
             }
         }

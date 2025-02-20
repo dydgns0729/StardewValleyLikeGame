@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d47f8e5ce9092438b8abebf245fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem: {fileID: 2903720342596098285, guid: 896e8bc6e99237e45b15c3e922556b47, type: 3}
+  dropItem: {fileID: 11400000, guid: ec855a971611d444ba966367e0a44a4d, type: 2}
   dropCount: 0
   spread: 0.7

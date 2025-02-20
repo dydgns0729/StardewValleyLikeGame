@@ -8,9 +8,11 @@ namespace MyStardewValleylikeGame
     public class TreeCuttable : ToolHit
     {
         #region Variables
-        [SerializeField] GameObject dropItem; // 떨어질 아이템의 프리팹, 인스펙터에서 설정 가능
+        [SerializeField] Item dropItem; // 떨어질 아이템의 SO, 인스펙터에서 설정 가능
         [SerializeField] int dropCount; // 떨어질 아이템의 개수를 결정하는 변수
         [SerializeField] float spread = 0.7f; // 아이템이 떨어질 위치의 범위 (spread 설정)
+
+
         #endregion
 
         // Hit 메서드는 나무가 베어질 때 실행되는 함수입니다.
@@ -30,8 +32,7 @@ namespace MyStardewValleylikeGame
                 position.y += spread * Random.value - spread / 2; // y축에 랜덤 오프셋 추가
 
                 // 설정된 위치에 아이템 프리팹을 인스턴스화(복제)하여 배치합니다.
-                GameObject itemGo = Instantiate(dropItem);
-                itemGo.transform.position = position;
+                ItemSpawnManager.Instance.SpawnItem(position, dropItem);
             }
 
             // 나무 오브젝트를 삭제합니다.

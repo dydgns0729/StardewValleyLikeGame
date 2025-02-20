@@ -6134,6 +6134,7 @@ GameObject:
   - component: {fileID: 1506272786}
   - component: {fileID: 1506272787}
   - component: {fileID: 1506272788}
+  - component: {fileID: 1506272789}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6165,7 +6166,7 @@ Transform:
   m_GameObject: {fileID: 1506272783}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.34079, y: -3.0376875, z: -0.06809398}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6278,6 +6279,19 @@ MonoBehaviour:
     item: {fileID: 0}
     count: 0
   itemIcon: {fileID: 299511267}
+--- !u!114 &1506272789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506272783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f43f6e102dac774f9f90eb05cb8030e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpItemPrefab: {fileID: 2903720342596098285, guid: 896e8bc6e99237e45b15c3e922556b47, type: 3}
 --- !u!1 &1528543700
 GameObject:
   m_ObjectHideFlags: 0

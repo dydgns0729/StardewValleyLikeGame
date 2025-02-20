@@ -25,10 +25,19 @@ namespace MyStardewValleylikeGame
             {
                 iconTransform.position = Input.mousePosition;
 
-                //UI창을 벗어나있는 상태로 클릭하면 아이템을 삭제한다.
+                //UI창을 벗어나있는 상태로 클릭하면 아이템을 들고있는 아이템 슬롯을 비우고 아이템을 카메라 위치값에 드롭(Spawn)시킨다.
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    Debug.Log("UI창을 벗어났습니다.");
+                    //ScreenToWorldPoint함수를 이용하여 마우스의 위치값을 3D 월드의 위치값으로 변환
+                    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    //z값을 0으로 설정한다
+                    worldPosition.z = 0f;
+                    //아이템을 드롭시킨다.
+                    ItemSpawnManager.Instance.SpawnItem(worldPosition, itemSlot.item, itemSlot.count);
+                    //아이템 슬롯을 비운다.
+                    itemSlot.Clear();
+                    //아이콘을 비활성화한다.
+                    UpdateIcon();
                 }
             }
         }

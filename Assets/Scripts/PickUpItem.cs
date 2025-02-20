@@ -25,6 +25,20 @@ namespace MyStardewValleylikeGame
             player = GameManager.Instance.player.transform;
         }
 
+        //어떤 아이템을 생성시킬지, 몇개를 생성시킬지 설정
+        public void Set(Item item, int count)
+        {
+            this.item = item;
+            this.count = count;
+
+            //스프라이트 렌더러를 찾아서 아이템의 아이콘을 설정
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = item.icon;
+            }
+        }
+
         private void Update()
         {
             //10초 타이머 시작

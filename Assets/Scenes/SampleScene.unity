@@ -6131,9 +6131,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1506272785}
   - component: {fileID: 1506272784}
+  - component: {fileID: 1506272790}
   - component: {fileID: 1506272786}
   - component: {fileID: 1506272787}
-  - component: {fileID: 1506272788}
   - component: {fileID: 1506272789}
   m_Layer: 0
   m_Name: GameManager
@@ -6156,7 +6156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1366476049}
   inventoryContainer: {fileID: 11400000, guid: 10f1982f4f4ebad4b854278c30334d3e, type: 2}
-  dragAndDropController: {fileID: 1506272788}
+  dragAndDropController: {fileID: 1506272790}
 --- !u!4 &1506272785
 Transform:
   m_ObjectHideFlags: 0
@@ -6263,7 +6263,20 @@ MonoBehaviour:
   timeText: {fileID: 1744078012}
   globalLight: {fileID: 619394801}
   days: 0
---- !u!114 &1506272788
+--- !u!114 &1506272789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506272783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f43f6e102dac774f9f90eb05cb8030e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpItemPrefab: {fileID: 2903720342596098285, guid: 896e8bc6e99237e45b15c3e922556b47, type: 3}
+--- !u!114 &1506272790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6279,19 +6292,6 @@ MonoBehaviour:
     item: {fileID: 0}
     count: 0
   itemIcon: {fileID: 299511267}
---- !u!114 &1506272789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506272783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f43f6e102dac774f9f90eb05cb8030e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpItemPrefab: {fileID: 2903720342596098285, guid: 896e8bc6e99237e45b15c3e922556b47, type: 3}
 --- !u!1 &1528543700
 GameObject:
   m_ObjectHideFlags: 0

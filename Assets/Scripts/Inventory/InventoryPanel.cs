@@ -24,6 +24,12 @@ namespace MyStardewValleylikeGame
         {
             // 현재 인벤토리 데이터를 UI에 반영
             Show();
+            inventory.inventoryChanged += Show;  // 인벤토리 변경 시 UI 갱신
+        }
+
+        private void OnDisable()
+        {
+            inventory.inventoryChanged -= Show;  // 이벤트 제거
         }
 
         // 인벤토리 슬롯의 인덱스를 InventoryButton에 설정

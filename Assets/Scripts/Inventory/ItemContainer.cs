@@ -40,6 +40,9 @@ namespace MyStardewValleylikeGame
     {
         public List<ItemSlot> slots;  // 인벤토리 슬롯 리스트 (아이템을 담을 공간)
 
+        public Action inventoryChanged;  // 인벤토리 변경 시 호출할 델리게이트
+
+
         // 아이템을 추가하는 함수
         public void Add(Item item, int count = 1)
         {
@@ -75,6 +78,7 @@ namespace MyStardewValleylikeGame
                     itemSlot.item = item;
                 }
             }
+            inventoryChanged?.Invoke();  // 인벤토리 변경 이벤트 호출
         }
     }
 }

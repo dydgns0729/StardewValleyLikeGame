@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace MyStardewValleylikeGame
 {
     // 인벤토리 슬롯(버튼)을 관리하는 클래스
-    public class InventoryButton : MonoBehaviour, IPointerClickHandler/*, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler*/
+    public class InventoryButton : MonoBehaviour, IPointerClickHandler, /*IBeginDragHandler, IDragHandler, IEndDragHandler,*/ IDropHandler
     {
         [SerializeField]
         Image icon;  // 아이템 아이콘 이미지
@@ -83,14 +83,14 @@ namespace MyStardewValleylikeGame
         //    //transform.parent.GetComponent<InventoryPanel>().Show();
         //}
 
-        //public void OnDrop(PointerEventData eventData)
-        //{
-        //    Debug.Log("드랍");
-        //    // 드래그 종료 시 해당 슬롯의 아이템을 드래그 앤 드롭 컨트롤러에 전달
-        //    ItemContainer inventory = GameManager.Instance.inventoryContainer;
-        //    GameManager.Instance.dragAndDropController.OnClick(inventory.slots[myIndex]);
-        //    transform.parent.GetComponent<InventoryPanel>().Show();
-        //}
+        public void OnDrop(PointerEventData eventData)
+        {
+            Debug.Log("드랍");
+            // 드래그 종료 시 해당 슬롯의 아이템을 드래그 앤 드롭 컨트롤러에 전달
+            ItemContainer inventory = GameManager.Instance.inventoryContainer;
+            GameManager.Instance.dragAndDropController.OnClick(inventory.slots[myIndex]);
+            transform.parent.GetComponent<InventoryPanel>().Show();
+        }
         #endregion
     }
 }

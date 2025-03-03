@@ -1,8 +1,8 @@
-using UnityEngine; 
-using UnityEngine.EventSystems; 
-using UnityEngine.UI; 
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace MyStardewValleylikeGame 
+namespace MyStardewValleylikeGame
 {
     public class ItemDragAndDropController : MonoBehaviour
     {
@@ -54,6 +54,11 @@ namespace MyStardewValleylikeGame
                 itemSlot.Set(tempItem, tempCount); // 임시 변수의 아이템 정보를 현재 슬롯에 설정
             }
             UpdateIcon();                          // 아이콘 업데이트 메서드 호출
+            #region 인벤토리 사용시 툴바가 같이 활성화시 사용 추후 수정시 삭제 필
+
+            GameManager.Instance.inventoryContainer.inventoryChanged?.Invoke(); // 인벤토리 변경 이벤트 호출
+
+            #endregion
         }
 
         // 아이콘 업데이트 메서드

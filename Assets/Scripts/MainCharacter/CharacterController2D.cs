@@ -11,7 +11,6 @@ namespace MyStardewValleylikeGame
     public class CharacterController2D : MonoBehaviour
     {
         #region Variables
-
         // 변수 선언
         Rigidbody2D rigidbody2D; // 캐릭터의 물리적 움직임을 담당하는 Rigidbody2D 컴포넌트
         [SerializeField] float speed = 2f; // 캐릭터의 이동 속도를 제어하는 변수, 유니티 에디터에서 설정 가능
@@ -19,7 +18,6 @@ namespace MyStardewValleylikeGame
         public Vector2 lastMotionVector; // 마지막으로 입력된 이동 방향을 저장하는 벡터
         Animator animator; // 캐릭터의 애니메이션을 관리하는 Animator 컴포넌트
         bool moving; // 캐릭터가 움직이는지 여부를 나타내는 불리언 변수
-
         #endregion
 
         // Awake는 스크립트가 활성화될 때 호출되며 초기화를 수행합니다.

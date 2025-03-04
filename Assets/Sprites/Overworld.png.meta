@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Overworld_0
+      name: Grass
       rect:
         serializedVersion: 2
         x: 0
@@ -4268,7 +4268,7 @@ TextureImporter:
         width: 46
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -20451,7 +20451,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Overworld_970
+      name: PlowableDirt
       rect:
         serializedVersion: 2
         x: 16
@@ -22624,7 +22624,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Overworld_0: -2025341579
+      Grass: -2025341579
       Overworld_1: 816270603
       Overworld_10: 1914726406
       Overworld_100: -1346889836
@@ -23664,7 +23664,6 @@ TextureImporter:
       Overworld_968: 1153032490
       Overworld_969: -1815929379
       Overworld_97: 212896700
-      Overworld_970: 777562942
       Overworld_971: 916958963
       Overworld_972: 401050434
       Overworld_973: -444838187
@@ -23696,6 +23695,7 @@ TextureImporter:
       Overworld_997: 1784919625
       Overworld_998: -1628390631
       Overworld_999: -294772619
+      PlowableDirt: 777562942
       TreeLog: 24489138
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

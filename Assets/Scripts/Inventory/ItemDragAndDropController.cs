@@ -14,6 +14,9 @@ namespace MyStardewValleylikeGame
         public bool isDraging = false;                  // 드래그 중인지 여부를 나타내는 플래그
         #endregion
 
+        // 아이콘이 활성화되어 있는지 여부를 반환하는 프로퍼티
+        public bool IsItemClicked => itemIcon.activeInHierarchy;
+
         private void Start()
         {
             //참조 변수

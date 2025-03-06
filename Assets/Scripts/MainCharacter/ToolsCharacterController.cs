@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace MyStardewValleylikeGame
 {
@@ -6,7 +7,6 @@ namespace MyStardewValleylikeGame
     public class ToolsCharacterController : MonoBehaviour
     {
         #region Variables
-
         // 캐릭터 컨트롤러 스크립트를 참조하는 변수
         CharacterController2D character;
         // Rigidbody2D 컴포넌트를 참조하는 변수
@@ -16,6 +16,25 @@ namespace MyStardewValleylikeGame
         [SerializeField] float offsetDistance = 1f;
         // 상호작용 가능한 영역의 크기
         [SerializeField] float sizeOfInteractableArea = 1.2f;
+        // 타일선택이 가능한 최대 거리
+        [SerializeField] float maxDistance = 1.5f;
+
+        // 마커 매니저를 참조하는 변수
+        [SerializeField] MarkerManager markerManager;
+        // 타일맵 리드 컨트롤러를 참조하는 변수
+        [SerializeField] TileMapReadController tileMapReadController;
+
+        // 타일 선택을 위한 변수
+        Vector3Int selectedTilePosition;
+        // 선택 가능한 타일인지 여부
+        bool selectable;
+
+        // 작물 관리자를 참조하는 변수
+        [SerializeField] CropsManager cropsManager;
+        // 밭을 갈 수 있는 타일 데이터
+        [SerializeField] TileData plowbleTileData;
+        // 툴바 컨트롤러를 참조하는 변수
+        ToolbarController toolbarController;
         #endregion
 
         // 컴포넌트가 활성화될 때 호출되는 메서드
@@ -23,38 +42,97 @@ namespace MyStardewValleylikeGame
         {
             // 캐릭터 컨트롤러와 Rigidbody2D 컴포넌트를 가져옴
             character = GetComponent<CharacterController2D>();
+            // Rigidbody2D 컴포넌트를 가져옴
             rgbd2d = GetComponent<Rigidbody2D>();
+            // 툴바 컨트롤러를 가져옴
+            toolbarController = GetComponent<ToolbarController>();
         }
 
         // 매 프레임마다 호출되는 메서드
         private void Update()
         {
+            // 타일 위치벡터값 확인 메서드 실행
+            SelectTile();
+
+            // 마커표시 여부 확인 메서드 실행
+            CanSelectCheck();
+
+            // 마커 메서드 실행
+            Marker();
+
             // 마우스 왼쪽 버튼이 눌렸을 때 도구 사용 메서드 실행
             if (Input.GetMouseButtonDown(0))
             {
-                UseTool();
+                // 도구 사용 메서드 실행
+                if (UseToolWorld()) return;
+                // 타일맵을 이용한 도구 사용 메서드 실행
+                UseToolGrid();
             }
         }
 
+        // 타일의 위치벡터값을 가져옴
+        private void SelectTile()
+        {
+            selectedTilePosition = tileMapReadController.GetGridPosition(Input.mousePosition, true);
+        }
+
+        // 타일 선택이 가능한지 확인하는 메서드
+        void CanSelectCheck()
+        {
+            // 캐릭터의 위치와 마우스 위치 사이의 거리를 계산
+            Vector2 characterPosition = transform.position;
+            Vector2 cameraPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            selectable = Vector2.Distance(characterPosition, cameraPosition) < maxDistance;
+            // 마커 매니저에 선택 가능 여부를 전달
+            markerManager.Show(selectable);
+        }
+
+        // 마커를 표시하는 메서드
+        private void Marker()
+        {
+            markerManager.markedCellPosition = selectedTilePosition;
+        }
+
         // 캐릭터가 도구를 사용하여 상호작용하는 메서드
-        private void UseTool()
+        private bool UseToolWorld()
         {
             // 캐릭터의 위치에서 오프셋 거리만큼 떨어진 위치를 계산
             Vector2 position = rgbd2d.position + character.lastMotionVector * offsetDistance;
 
-            // 지정된 위치에서 상호작용 가능한 객체들을 감지
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(position, sizeOfInteractableArea);
+            // 툴바 컨트롤러에서 현재 선택된 아이템을 가져옴
+            Item item = toolbarController.GetItem;
+            // 아이템이 없다면 false 반환
+            if (item == null) return false;
+            // 아이템의 사용 메서드가 없다면 false 반환
+            if (item.onAction == null) return false;
 
-            // 감지된 객체들 중에서 ToolHit 컴포넌트를 가진 객체를 찾음
-            foreach (Collider2D collider in colliders)
+            bool complete = item.onAction.OnApply(position);
+
+            return complete;
+        }
+
+        // 타일맵을 이용하여 도구를 사용하는 메서드
+        private void UseToolGrid()
+        {
+            if (selectable)
             {
-                ToolHit hit = collider.GetComponent<ToolHit>();
+                // 위치값을 통해 타일의 베이스를 가져옴
+                TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
+                // 타일의 데이터를 가져옴
+                TileData tileData = tileMapReadController.GetTileData(tileBase);
+                // 타일의 데이터가 밭을 갈 수 있는 타일인지 확인
+                if (tileData != plowbleTileData) return;
 
-                // 객체가 ToolHit 컴포넌트를 가지고 있다면 Hit 메서드를 호출하고 반복문 종료
-                if (hit != null)
+                // 선택된 타일의 위치에 밭이 있는지 확인
+                if (cropsManager.Check(selectedTilePosition))
                 {
-                    hit.Hit();
-                    break;
+                    // 해당 위치에 씨앗을 심을 수 있도록 하는 메서드 호출
+                    cropsManager.Seed(selectedTilePosition);
+                }
+                else    //밭이 없다면
+                {
+                    // 해당 위치의 타일에 밭을 갈 수 있도록 하는 메서드 호출
+                    cropsManager.Plow(selectedTilePosition);
                 }
             }
         }

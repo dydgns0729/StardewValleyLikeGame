@@ -73,7 +73,7 @@ namespace MyStardewValleylikeGame
             // 드래그 앤 드롭 컨트롤러의 드래그 시작 메서드 호출
             gameManager.dragAndDropController.OnDragStart(gameManager.inventoryContainer.slots[myIndex]);
             // 인벤토리 패널을 최신화
-            transform.parent.GetComponent<InventoryPanel>().Show();
+            transform.parent.GetComponent<ItemPanel>().Show();
         }
 
         // 드래그 중 이벤트 처리 메서드 (현재는 빈 메서드)
@@ -96,7 +96,7 @@ namespace MyStardewValleylikeGame
             // 드래그 앤 드롭 컨트롤러의 인벤토리에 드롭 메서드 호출
             gameManager.dragAndDropController.DropInInventoryUI(gameManager.inventoryContainer.slots[myIndex]);
             // 인벤토리 패널을 최신화
-            transform.parent.GetComponent<InventoryPanel>().Show();
+            transform.parent.GetComponent<ItemPanel>().Show();
         }
         #endregion
     }

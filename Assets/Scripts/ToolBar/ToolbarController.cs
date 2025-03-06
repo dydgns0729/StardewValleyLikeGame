@@ -10,6 +10,15 @@ namespace MyStardewValleylikeGame
         int selectedTool;                      // 현재 선택된 툴의 인덱스
 
         public Action<int> onChanged;           // 툴바 변경 시 호출할 이벤트
+
+        public Item GetItem                     // 현재 선택된 툴바의 아이템을 가져오는 프로퍼티
+        {
+            get
+            {
+                // GameManager의 인벤토리 데이터에서 현재 선택된 툴의 아이템을 가져옴
+                return GameManager.Instance.inventoryContainer.slots[selectedTool].item;
+            }
+        }
         #endregion
 
         private void Update()
@@ -29,7 +38,7 @@ namespace MyStardewValleylikeGame
                     selectedTool -= 1; // 이전 슬롯으로 이동
                     selectedTool = (selectedTool < 0) ? toolbarSize - 1 : selectedTool; // 처음에서 뒤로 가면 마지막으로
                 }
-                Debug.Log("셀렉트" + selectedTool);
+                //Debug.Log("셀렉트" + selectedTool);
                 onChanged?.Invoke(selectedTool); // 변경 이벤트 호출
             }
         }

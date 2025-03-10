@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -13,7 +12,7 @@ namespace MyStardewValleylikeGame
         public bool isPlanted;
     }
 
-
+    //밭을 가는 상태를 관리하는 클래스
     public class CropsManager : MonoBehaviour
     {
         //밭을 간 상태(갈아엎어진 땅)의 타일

@@ -29,12 +29,10 @@ namespace MyStardewValleylikeGame
         // 선택 가능한 타일인지 여부
         bool selectable;
 
-        // 작물 관리자를 참조하는 변수
-        [SerializeField] CropsManager cropsManager;
-        // 밭을 갈 수 있는 타일 데이터
-        [SerializeField] TileData plowbleTileData;
         // 툴바 컨트롤러를 참조하는 변수
         ToolbarController toolbarController;
+        // 애니메이터 컴포넌트를 참조하는 변수
+        Animator animator;
         #endregion
 
         // 컴포넌트가 활성화될 때 호출되는 메서드
@@ -46,6 +44,8 @@ namespace MyStardewValleylikeGame
             rgbd2d = GetComponent<Rigidbody2D>();
             // 툴바 컨트롤러를 가져옴
             toolbarController = GetComponent<ToolbarController>();
+            // 애니메이터 컴포넌트를 가져옴
+            animator = GetComponent<Animator>();
         }
 
         // 매 프레임마다 호출되는 메서드
@@ -106,6 +106,9 @@ namespace MyStardewValleylikeGame
             // 아이템의 사용 메서드가 없다면 false 반환
             if (item.onAction == null) return false;
 
+            // 애니메이션 트리거를 실행
+            animator.SetTrigger("act");
+
             bool complete = item.onAction.OnApply(position);
 
             return complete;
@@ -116,24 +119,19 @@ namespace MyStardewValleylikeGame
         {
             if (selectable)
             {
-                // 위치값을 통해 타일의 베이스를 가져옴
-                TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
-                // 타일의 데이터를 가져옴
-                TileData tileData = tileMapReadController.GetTileData(tileBase);
-                // 타일의 데이터가 밭을 갈 수 있는 타일인지 확인
-                if (tileData != plowbleTileData) return;
 
-                // 선택된 타일의 위치에 밭이 있는지 확인
-                if (cropsManager.Check(selectedTilePosition))
-                {
-                    // 해당 위치에 씨앗을 심을 수 있도록 하는 메서드 호출
-                    cropsManager.Seed(selectedTilePosition);
-                }
-                else    //밭이 없다면
-                {
-                    // 해당 위치의 타일에 밭을 갈 수 있도록 하는 메서드 호출
-                    cropsManager.Plow(selectedTilePosition);
-                }
+                // 툴바 컨트롤러에서 현재 선택된 아이템을 가져옴
+                Item item = toolbarController.GetItem;
+                // 아이템이 없다면 false 반환
+                if (item == null) return;
+                // 아이템에 타일맵 액션 메서드가 없다면 false 반환
+                if (item.onTileMapAction == null) return;
+
+                // 애니메이션 트리거를 실행
+                animator.SetTrigger("act");
+
+                // 아이템의 타일맵 액션 메서드를 실행
+                bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController);
             }
         }
     }

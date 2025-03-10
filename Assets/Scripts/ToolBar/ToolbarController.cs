@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace MyStardewValleylikeGame
 {
@@ -19,9 +21,30 @@ namespace MyStardewValleylikeGame
                 return GameManager.Instance.inventoryContainer.slots[selectedTool].item;
             }
         }
+        #region KeyMapping 추가
+        private Dictionary<KeyCode, int> toolMappings = new()
+        {
+            { KeyCode.Alpha1, 0 }, { KeyCode.Alpha2, 1 }, { KeyCode.Alpha3, 2 },
+            { KeyCode.Alpha4, 3 }, { KeyCode.Alpha5, 4 }, { KeyCode.Alpha6, 5 },
+            { KeyCode.Alpha7, 6 }, { KeyCode.Alpha8, 7 }, { KeyCode.Alpha9, 8 },
+            { KeyCode.Alpha0, 9 }, { KeyCode.Minus, 10 }, { KeyCode.Equals, 11 }
+        };
+        #endregion
+
         #endregion
 
         private void Update()
+        {
+            CheckNumberInput(); // 숫자 키 입력을 체크하는 메서드 호출
+            CheckNumberWheel(); // 마우스 휠 입력을 체크하는 메서드 호출
+        }
+
+        public void SetSelectedTool(int id)
+        {
+            selectedTool = id;
+        }
+
+        private void CheckNumberWheel()
         {
             float delta = Input.mouseScrollDelta.y; // 마우스 휠 입력을 감지 (위로 +, 아래로 -)
 
@@ -43,9 +66,18 @@ namespace MyStardewValleylikeGame
             }
         }
 
-        public void SetSelectedTool(int id)
+        // 숫자 키 입력을 체크하는 메서드
+        private void CheckNumberInput()
         {
-            selectedTool = id;
+            foreach (var kvp in toolMappings)
+            {
+                if (Input.GetKeyDown(kvp.Key))
+                {
+                    selectedTool = kvp.Value;
+                    onChanged?.Invoke(selectedTool);
+                    break; // 첫 번째로 눌린 키만 처리
+                }
+            }
         }
     }
 }

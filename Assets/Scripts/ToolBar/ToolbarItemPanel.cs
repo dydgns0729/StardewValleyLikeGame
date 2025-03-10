@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace MyStardewValleylikeGame
@@ -6,6 +9,7 @@ namespace MyStardewValleylikeGame
     {
         #region Variables
         [SerializeField] ToolbarController toolbarController;  // 툴바 컨트롤러 참조 변수
+        List<TextMeshProUGUI> numberTexts;                     // 인벤토리 버튼의 넘버링을 표시하는 TextMeshProUGUI 컴포넌트 리스트
         int selectedTool;                                      // 현재 선택된 툴의 인덱스
         #endregion
 
@@ -14,6 +18,30 @@ namespace MyStardewValleylikeGame
             toolbarController.onChanged += Highlight;  // 툴바 변경 시 호출할 이벤트 추가
 
             Highlight(0); // 초기 선택된 툴을 표시
+
+            #region numberTexts 추가
+            numberTexts = GetComponentsInChildren<TextMeshProUGUI>().Where(textBox => textBox.name == "NumberText").ToList();
+            for (int i = 0; i < numberTexts.Count; i++)
+            {
+                numberTexts[i].text = (i + 1).ToString();
+                if (i >= 9)
+                {
+                    switch (i)
+                    {
+                        case 9:
+                            numberTexts[i].text = "0";
+                            break;
+                        case 10:
+                            numberTexts[i].text = "-";
+                            break;
+                        case 11:
+                            numberTexts[i].text = "=";
+                            break;
+                    }
+                }
+            }
+
+            #endregion
         }
 
         public override void OnClick(int id)

@@ -28,12 +28,14 @@ namespace MyStardewValleylikeGame
 
         private void Start()
         {
+            //딕셔너리 초기화
             crops = new Dictionary<Vector2Int, Crops>();
         }
 
         public bool Check(Vector3Int position)
         {
-            return crops.ContainsKey((Vector2Int)position);
+            // 해당 위치에 밭이 갈려있는지 확인
+            return crops.ContainsKey((Vector2Int)position) && !crops[(Vector2Int)position].isPlanted;
         }
 
         //씨앗을 심을 수 있는지 확인하는 메서드 (메서드 이름을 TryPlantSeed로 변경할까 고민중..)
@@ -72,7 +74,15 @@ namespace MyStardewValleylikeGame
             //Crops 객체를 새로 생성
             Crops crop = new Crops();
             //딕셔너리에 해당 위치와 Crops 객체를 추가
-            crops.Add((Vector2Int)position, crop);
+            if (!crops.ContainsKey((Vector2Int)position))
+            {
+                crops.Add((Vector2Int)position, crop);
+            }
+            else
+            {
+                crops.Remove((Vector2Int)position);
+                crops.Add((Vector2Int)position, crop);
+            }
 
             //해당 위치에 밭을 간 타일을 배치
             targetTilemap.SetTile(position, plowed);

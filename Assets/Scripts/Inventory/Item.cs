@@ -10,5 +10,6 @@ namespace MyStardewValleylikeGame
         public Sprite icon;         //아이템 아이콘 이미지
         public ToolAction onAction; //아이템 사용 시 실행할 도구 액션
         public ToolAction onTileMapAction; //아이템 사용 시 실행할 타일맵 도구 액션
+        public ToolAction onItemUsed; //아이템 사용 시 실행할 아이템 사용 액션
     }
 }

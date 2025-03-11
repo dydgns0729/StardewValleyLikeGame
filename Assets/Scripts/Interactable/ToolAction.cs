@@ -15,5 +15,10 @@ namespace MyStardewValleylikeGame
             Debug.LogError("OnApplyToTileMap is not implemented");
             return true;
         }
+
+        public virtual void OnItemUsed(Item item, ItemContainer itemContainer)
+        {
+            Debug.LogError("OnItemUsed is not implemented");
+        }
     }
 }

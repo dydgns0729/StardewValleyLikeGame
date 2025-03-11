@@ -70,8 +70,6 @@ namespace MyStardewValleylikeGame
                     Debug.LogWarning("GameManager의 inventoryContainer가 비어있습니다.");
                 }
             }
-
         }
-
     }
 }

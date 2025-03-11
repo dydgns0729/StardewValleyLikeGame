@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341a488eb969fd6498af6a4502c6dfee, type: 3}
   m_Name: Seeds
   m_EditorClassIdentifier: 
-  name: 
-  stackable: 0
-  icon: {fileID: 0}
+  name: Seeds
+  stackable: 1
+  icon: {fileID: 21300000, guid: de0cec18ea1268c4a87dfd39a9852e2f, type: 3}
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 11400000, guid: 188e1f2c32dac0047b827296f8977cc2, type: 2}
+  onItemUsed: {fileID: 11400000, guid: 188e1f2c32dac0047b827296f8977cc2, type: 2}

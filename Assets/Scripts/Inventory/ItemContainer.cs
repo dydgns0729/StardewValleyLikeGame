@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MyStardewValleylikeGame
@@ -81,6 +81,59 @@ namespace MyStardewValleylikeGame
                 }
             }
             inventoryChanged?.Invoke();  // 인벤토리 변경 이벤트 호출
+        }
+
+        // 아이템을 제거하는 함수
+        public void Remove(Item itemToRemove, int count = 1)
+        {
+            if (slots == null || itemToRemove == null) return;
+
+            if (itemToRemove.stackable)
+            {
+                //전체 개수를 먼저 확인
+                int totalItemCount = slots.Where(slot => slot.item == itemToRemove)
+                                          .Sum(slot => slot.count);
+                if (totalItemCount < count)
+                {
+                    Debug.Log("사용하려는 아이템이 가지고 있는 아이템보다 많습니다");
+                    return;
+                } // 개수가 부족하면 제거하지 않음
+
+                // 아이템이 스택 가능한 경우, 해당 아이템을 가진 모든 슬롯 찾기
+                List<ItemSlot> itemSlots = slots.FindAll(slot => slot.item == itemToRemove);
+                if (itemSlots.Count == 0) return; // 아이템이 없으면 종료
+
+                // 가져온 슬롯들을 순회하면서 개수만큼 제거
+                foreach (ItemSlot itemSlot in itemSlots)
+                {
+                    if (count <= 0) break; // 필요한 만큼 다 뺐으면 종료
+
+                    // 현재 슬롯의 개수가 필요한 개수보다 작거나 같으면
+                    if (itemSlot.count <= count)
+                    {
+                        count -= itemSlot.count; // 부족한 개수만큼 계속 감소
+                        itemSlot.Clear(); // 슬롯 비우기
+                    }
+                    else
+                    {
+                        itemSlot.count -= count;
+                        break; // 필요한 만큼 다 뺐으므로 루프 종료
+                    }
+                }
+            }
+            else
+            {
+                // 아이템이 스택 불가능한 경우, 해당 아이템을 가진 슬롯 찾아서 제거
+                ItemSlot itemSlot = slots.Find(slot => slot.item == itemToRemove);
+                // 해당 아이템을 가진 슬롯이 존재하면
+                if (itemSlot != null)
+                {
+                    // 슬롯 비우기
+                    itemSlot.Clear();
+                }
+            }
+
+            inventoryChanged?.Invoke(); // UI 업데이트
         }
     }
 }

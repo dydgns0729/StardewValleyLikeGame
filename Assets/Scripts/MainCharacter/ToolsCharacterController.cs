@@ -111,6 +111,15 @@ namespace MyStardewValleylikeGame
 
             bool complete = item.onAction.OnApply(position);
 
+            if (complete)
+            {
+                if (item.onItemUsed != null)
+                {
+                    // 아이템 사용 메서드 실행
+                    item.onItemUsed.OnItemUsed(item, GameManager.Instance.inventoryContainer);
+                }
+            }
+
             return complete;
         }
 
@@ -132,6 +141,14 @@ namespace MyStardewValleylikeGame
 
                 // 아이템의 타일맵 액션 메서드를 실행
                 bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController);
+                if (complete)
+                {
+                    if (item.onItemUsed != null)
+                    {
+                        // 아이템 사용 메서드 실행
+                        item.onItemUsed.OnItemUsed(item, GameManager.Instance.inventoryContainer);
+                    }
+                }
             }
         }
     }

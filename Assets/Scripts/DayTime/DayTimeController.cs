@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -10,6 +11,7 @@ namespace MyStardewValleylikeGame
         private const float SecondsInDay = 86400f;  // 하루(24시간)를 초단위로 계산
         private float time;                         // 현재 시간
         [SerializeField] private float timeScale = 60f; // 시간 스케일 조정
+        [SerializeField] private float startAtTime = 21600f; // 게임 시작 시간 (6시)
 
         [SerializeField] private Color nightLightColor; // 밤 컬러
         [SerializeField] private Color dayLightColor;   // 낮 컬러
@@ -20,14 +22,40 @@ namespace MyStardewValleylikeGame
 
         [SerializeField] private int days = 0;
 
-        // 시, 분 계산
-        private int currentHour;
-        private int currentMinute;
-
         // 매 프레임 컬러 계산 최소화를 위한 캐싱
         private float previousCurveValue = -1f;
         private Color previousColor;
+
+        int Hours
+        {
+            get { return (int)(time / 3600f); } // 시간 단위
+        }
+
+        int Minutes
+        {
+            get { return (int)(time % 3600 / 60f); } // 분 단위
+        }
+
+        List<TimeAgent> agents;
+        [SerializeField] private float phaseLength = 900f;     //스폰체크할 시간
+        private int oldPhase = 0;
         #endregion
+
+        private void Awake()
+        {
+            agents = new List<TimeAgent>();
+            time = startAtTime;
+        }
+
+        public void Subscribe(TimeAgent agent)
+        {
+            agents.Add(agent);
+        }
+
+        public void Unsubscribe(TimeAgent agent)
+        {
+            agents.Remove(agent);
+        }
 
         private void Update()
         {
@@ -45,22 +73,20 @@ namespace MyStardewValleylikeGame
             {
                 NextDay();
             }
+
+            TimeAgent();
         }
 
         private void UpdateTimeDisplay()
         {
-            // 시, 분 계산
-            currentHour = (int)(time / 3600f);
-            currentMinute = (int)((time % 3600) / 60f);
-
             // 텍스트 업데이트
-            timeText.text = $"{currentHour:00} : {currentMinute:00}";
+            timeText.text = $"{Hours:00} : {Minutes:00}";
         }
 
         private void UpdateLighting()
         {
             // AnimationCurve에서 현재 값 가져오기
-            float curveData = nightTimeCurve.Evaluate(currentHour + currentMinute / 60f);
+            float curveData = nightTimeCurve.Evaluate(Hours + Minutes / 60f);
 
             // 이전 값과 동일하면 계산 생략
             if (Mathf.Approximately(curveData, previousCurveValue)) return;
@@ -75,6 +101,20 @@ namespace MyStardewValleylikeGame
         {
             time = 0f;
             days++;
+        }
+
+        private void TimeAgent()
+        {
+            int phase = (int)(time / phaseLength);
+
+            if (oldPhase != phase)
+            {
+                oldPhase = phase;
+                for (int i = 0; i < agents.Count; i++)
+                {
+                    agents[i].Invoke();
+                }
+            }
         }
     }
 }

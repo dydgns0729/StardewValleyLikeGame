@@ -13,7 +13,7 @@ namespace MyStardewValleylikeGame
         public void SpawnItem(Vector3 position, Item item, int count = 1)
         {
             //prefab을 생성한다.
-            GameObject itemGO = Instantiate(pickUpItemPrefab, position, Quaternion.identity);
+            GameObject itemGO = Instantiate(pickUpItemPrefab, position, Quaternion.identity, this.transform);
             //생성된 prefab에 아이템을 설정한다.
             itemGO.GetComponent<PickUpItem>().Set(item, count);
         }

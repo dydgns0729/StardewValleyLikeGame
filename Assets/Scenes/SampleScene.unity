@@ -3332,7 +3332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.89
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3785,7 +3785,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3810,7 +3810,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.345, y: -3.52, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4303,7 +4303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.89
+      value: -3.49
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7022,7 +7022,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1366476052}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 2.5
+    OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 5000
     Dutch: 0
@@ -7048,7 +7048,7 @@ Transform:
   m_GameObject: {fileID: 1316987397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.345, y: -3.52, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7163,7 +7163,7 @@ Transform:
   m_GameObject: {fileID: 1366476049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.345, y: -3.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7232,7 +7232,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 1.40625}
+    oldSize: {x: 1.875, y: 2.8125}
     newSize: {x: 0.24, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7901,7 +7901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b38861851c09741982a7f50ad7e11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 360
+  timeScale: 600
   startAtTime: 21600
   nightLightColor: {r: 0, g: 0.015686275, b: 0.21568628, a: 1}
   dayLightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8025,6 +8025,7 @@ MonoBehaviour:
   plowed: {fileID: 11400000, guid: cd573b6ddb58f604eac42ae6016ec0b8, type: 2}
   seeded: {fileID: 11400000, guid: 23c48ef130d0a444c8fd5836aa937ed3, type: 2}
   targetTilemap: {fileID: 797983763}
+  cropsSpritePrefab: {fileID: 4488719782736431928, guid: 4cb09c761388f75448bbb8f4b87aca7b, type: 3}
 --- !u!1 &1528543700
 GameObject:
   m_ObjectHideFlags: 0
@@ -9767,7 +9768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.83
+      value: -4.43
       objectReference: {fileID: 0}
     - target: {fileID: 8902630395487117772, guid: 65389e08bd18a2248b183fcdc2b1d41b, type: 3}
       propertyPath: m_LocalPosition.y

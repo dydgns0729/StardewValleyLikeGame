@@ -140,7 +140,7 @@ namespace MyStardewValleylikeGame
                 animator.SetTrigger("act");
 
                 // 아이템의 타일맵 액션 메서드를 실행
-                bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController);
+                bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTilePosition, tileMapReadController, item);
                 if (complete)
                 {
                     if (item.onItemUsed != null)

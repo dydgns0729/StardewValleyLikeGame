@@ -15,6 +15,11 @@ namespace MyStardewValleylikeGame
 
         private void Start()
         {
+            Init();
+        }
+
+        public void Init()
+        {
             // 게임 매니저의 시간 컨트롤러에 이 클래스를 등록
             GameManager.Instance.dayTimeController.Subscribe(this);
         }

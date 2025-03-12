@@ -11,5 +11,6 @@ namespace MyStardewValleylikeGame
         public ToolAction onAction; //아이템 사용 시 실행할 도구 액션
         public ToolAction onTileMapAction; //아이템 사용 시 실행할 타일맵 도구 액션
         public ToolAction onItemUsed; //아이템 사용 시 실행할 아이템 사용 액션
+        public Crop crop;           //작물 정보
     }
 }

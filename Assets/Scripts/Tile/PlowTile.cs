@@ -12,7 +12,7 @@ namespace MyStardewValleylikeGame
         [SerializeField] List<TileBase> canPlow;
 
         // 밭을 갈 수 있는지 확인하고, 가능하다면 밭을 간다.
-        public override bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController)
+        public override bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController, Item item)
         {
             // 해당 위치의 타일을 가져옴
             TileBase tileToPlow = tileMapReadController.GetTileBase(gridPosition);

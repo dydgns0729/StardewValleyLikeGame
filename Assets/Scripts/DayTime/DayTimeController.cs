@@ -37,7 +37,7 @@ namespace MyStardewValleylikeGame
         }
 
         List<TimeAgent> agents;
-        [SerializeField] private float phaseLength = 900f;     //스폰체크할 시간
+        [SerializeField] private float phaseLength = 900f;     //시간이벤트 발생 주기
         private int oldPhase = 0;
         #endregion
 

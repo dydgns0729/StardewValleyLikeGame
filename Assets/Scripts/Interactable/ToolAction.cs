@@ -10,7 +10,7 @@ namespace MyStardewValleylikeGame
             return true;
         }
 
-        public virtual bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController)
+        public virtual bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController, Item item)
         {
             Debug.LogError("OnApplyToTileMap is not implemented");
             return true;

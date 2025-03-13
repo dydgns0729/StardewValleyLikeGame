@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +19,8 @@ namespace MyStardewValleylikeGame
         [SerializeField] float sizeOfInteractableArea = 1.2f;
         // 타일선택이 가능한 최대 거리
         [SerializeField] float maxDistance = 1.5f;
+        // 타일을 클릭하여 수확할 때 실행될 액션. 도구를 사용하여 타일에서 작물을 수확하는 동작을 처리하는 'ToolAction' 객체
+        [SerializeField] ToolAction onTilePickup;
 
         // 마커 매니저를 참조하는 변수
         [SerializeField] MarkerManager markerManager;
@@ -128,11 +131,18 @@ namespace MyStardewValleylikeGame
         {
             if (selectable)
             {
-
                 // 툴바 컨트롤러에서 현재 선택된 아이템을 가져옴
                 Item item = toolbarController.GetItem;
                 // 아이템이 없다면 false 반환
-                if (item == null) return;
+                if (item == null)
+                {
+                    if (onTilePickup != null)   // 타일 수확 액션이 설정되어 있다면
+                    {
+                        // 타일을 수확하는 메서드 호출 (작물을 수확하거나 해당 타일에 대한 작업을 처리)
+                        PickUpTile();
+                    }
+                    return;
+                }
                 // 아이템에 타일맵 액션 메서드가 없다면 false 반환
                 if (item.onTileMapAction == null) return;
 
@@ -150,6 +160,14 @@ namespace MyStardewValleylikeGame
                     }
                 }
             }
+        }
+        // onTilePickup의 OnApplyToTileMap 메서드를 호출하여, 선택된 타일에서 수확 액션을 실행합니다.
+        // selectedTilePosition은 현재 선택된 타일의 위치이고,
+        // tileMapReadController는 타일맵을 읽는 컨트롤러로, 수확 작업을 처리하는 데 필요한 정보를 제공합니다.
+        // null은 아이템을 전달하지 않으므로, 아이템 없이 수확 작업만 진행됩니다.
+        private void PickUpTile()
+        {
+            onTilePickup.OnApplyToTileMap(selectedTilePosition, tileMapReadController, null);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace MyStardewValleylikeGame
         {
             CheckToHighlight(); // 매 프레임마다 하이라이트할 오브젝트를 검사
 
-            // 마우스 오른쪽 버튼이 눌렸을 때 도구 사용 메서드 실행
+            // 마우스 오른쪽 버튼이 눌렸을 때 상호작용 메서드 실행
             if (Input.GetMouseButtonDown(1))
             {
                 Interact();

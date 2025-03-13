@@ -4,9 +4,11 @@ namespace MyStardewValleylikeGame
 {
     public class TalkInteract : Interactable
     {
+        [SerializeField] DialogueContainer dialogue;
+
         public override void Interact()
         {
-            Debug.Log("Hi!");
+            GameManager.Instance.dialogueSystem.Initialize(dialogue);
         }
     }
 }

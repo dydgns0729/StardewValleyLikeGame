@@ -4645,13 +4645,14 @@ GameObject:
   - component: {fileID: 678761570}
   - component: {fileID: 678761572}
   - component: {fileID: 678761571}
+  - component: {fileID: 678761573}
   m_Layer: 5
   m_Name: DialoguePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &678761570
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4712,6 +4713,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678761569}
   m_CullTransparentMesh: 1
+--- !u!114 &678761573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678761569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ba9b421bc96e148bee74f5ed5849d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetText: {fileID: 1849015233}
+  nameText: {fileID: 2067497550}
 --- !u!1001 &686242176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5606,6 +5621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fab6fdf49bd4f409e4196cd0af8145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogue: {fileID: 11400000, guid: 3ee066ee37eb9a0498449082cd22ebf5, type: 2}
 --- !u!61 &890527145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8017,6 +8033,7 @@ MonoBehaviour:
   inventoryContainer: {fileID: 11400000, guid: 10f1982f4f4ebad4b854278c30334d3e, type: 2}
   dragAndDropController: {fileID: 1506272790}
   dayTimeController: {fileID: 1506272787}
+  dialogueSystem: {fileID: 678761573}
 --- !u!4 &1506272785
 Transform:
   m_ObjectHideFlags: 0

@@ -2134,9 +2134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetText: {fileID: 1849015233}
   nameText: {fileID: 2067497550}
-  portrait: {fileID: 920422250}
-  visibleTextPercent: 0
-  timePerLetter: 0.05
 --- !u!1001 &686242176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5221,7 +5218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b38861851c09741982a7f50ad7e11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 600
+  timeScale: 3600
   startAtTime: 21600
   nightLightColor: {r: 0, g: 0.015686275, b: 0.21568628, a: 1}
   dayLightColor: {r: 1, g: 1, b: 1, a: 1}

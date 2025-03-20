@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058290645163611314, guid: 05e9c6968d368004ba06b4a92e335649, type: 3}
       propertyPath: sceneNameToTransition
-      value: SampleScene 1
+      value: MainScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

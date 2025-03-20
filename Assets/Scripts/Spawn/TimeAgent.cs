@@ -10,6 +10,8 @@ namespace MyStardewValleylikeGame
     {
         #region Variables
         public Action onTimeTick; // 시간이 흐를 때 호출할 함수
+
+        private bool isSubscribed = false; // 구독 여부
         #endregion
 
 
@@ -20,14 +22,24 @@ namespace MyStardewValleylikeGame
 
         public void Init()
         {
+            if (isSubscribed) return;
             // 게임 매니저의 시간 컨트롤러에 이 클래스를 등록
+            isSubscribed = true;
             GameManager.Instance.dayTimeController.Subscribe(this);
         }
 
         private void OnDestroy()
         {
+            if (!isSubscribed) return;
             // 게임 매니저의 시간 컨트롤러에 이 클래스를 등록 해제
             GameManager.Instance.dayTimeController.Unsubscribe(this);
+            isSubscribed = false;
+        }
+
+        private void OnApplicationQuit()
+        {
+            // 게임 종료 시 구독 해제
+            OnDestroy();
         }
 
         public void Invoke()

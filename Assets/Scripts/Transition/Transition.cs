@@ -35,20 +35,20 @@ namespace MyStardewValleylikeGame
         // 외부에서 호출하여 특정 Transform을 목표 위치(destination)로 이동시키는 메서드
         internal void InitiateTransition(Transform toTransition)
         {
-            Cinemachine.CinemachineBrain currentCamera = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
+            //Cinemachine.CinemachineBrain currentCamera = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
 
 
             switch (transitionType)
             {
                 case TransitionType.Warp:
-                    currentCamera.ActiveVirtualCamera.OnTargetObjectWarped(toTransition, destination.position - toTransition.position);
+                    //currentCamera.ActiveVirtualCamera.OnTargetObjectWarped(toTransition, destination.position - toTransition.position);
                     // toTransition의 위치를 destination의 위치로 설정
                     toTransition.position = destination.position;
                     break;
                 case TransitionType.Scene:
-                    currentCamera.ActiveVirtualCamera.OnTargetObjectWarped(toTransition, destination.position - toTransition.position);
+                    //currentCamera.ActiveVirtualCamera.OnTargetObjectWarped(toTransition, destination.position - toTransition.position);
                     // 씬 전환
-                    GameSceneManager.Instance.SwitchScene(sceneNameToTransition, targetPosition);
+                    GameSceneManager.Instance.InitSwitchScene(sceneNameToTransition, targetPosition);
                     break;
             }
         }

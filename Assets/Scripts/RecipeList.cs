@@ -6,7 +6,7 @@ namespace MyStardewValleylikeGame
 {
     // `RecipeList`는 여러 가지 `CraftingRecipe`를 저장하는 리스트를 관리하는 ScriptableObject입니다.
     // 레시피 목록을 정의하고 이를 게임 데이터로 저장하고 관리하는 데 사용됩니다.
-    [CreateAssetMenu(menuName = "Data/RecipeList")]  // Unity 에디터에서 "Data/RecipeList" 항목으로 이 객체를 생성할 수 있도록 함
+    [CreateAssetMenu(menuName = "Data/RecipeList")] 
     public class RecipeList : ScriptableObject
     {
         #region Variables

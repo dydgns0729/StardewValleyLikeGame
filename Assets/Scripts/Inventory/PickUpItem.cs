@@ -61,6 +61,7 @@ namespace MyStardewValleylikeGame
                 //인벤토리가 있는지 확인
                 if (GameManager.Instance.inventoryContainer != null)
                 {
+                    Debug.Log("아이템을 획득!");
                     //인벤토리에 아이템 추가
                     GameManager.Instance.inventoryContainer.Add(item, count);
                     Destroy(gameObject);

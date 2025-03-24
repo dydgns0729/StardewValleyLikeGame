@@ -47,7 +47,10 @@ namespace MyStardewValleylikeGame
         // 포인터 클릭 이벤트 처리 메서드
         public void OnPointerClick(PointerEventData eventData)
         {
+            // 부모 오브젝트에서 ItemPanel 컴포넌트를 가져옵니다.
             ItemPanel itemPanel = transform.parent.GetComponent<ItemPanel>();
+
+            // 가져온 ItemPanel에서 OnClick 메서드를 호출하며, myIndex를 인자로 전달합니다.
             itemPanel.OnClick(myIndex);
 
             #region 툴바 추가 전

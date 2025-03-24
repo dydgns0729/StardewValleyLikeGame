@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace MyStardewValleylikeGame
@@ -135,5 +136,52 @@ namespace MyStardewValleylikeGame
 
             inventoryChanged?.Invoke(); // UI 업데이트
         }
+
+        internal bool CheckFreeSpace()
+        {
+            // slots 리스트를 순회하여 각 슬롯의 아이템이 비어 있는지 확인합니다.
+            for (int i = 0; i < slots.Count; i++)
+            {
+                // 슬롯에 아이템이 없다면 (즉, 비어 있다면) true를 반환하여 빈 공간이 있음을 알려줍니다.
+                if (slots[i].item == null)
+                {
+                    return true;
+                }
+            }
+            // 모든 슬롯에 아이템이 존재하면 false를 반환하여 빈 공간이 없음을 알려줍니다.
+            return false;
+        }
+
+        internal bool CheckItem(ItemSlot checkingItem)
+        {
+            // slots 리스트에서 checkingItem과 동일한 아이템을 가진 슬롯을 찾습니다.
+            ItemSlot itemSlot = slots.Find(slot => slot.item == checkingItem.item);
+
+            // 해당 아이템이 존재하지 않으면 false를 반환합니다.
+            if (itemSlot == null) return false;
+
+            // 아이템이 스택 가능한 경우, 슬롯에 있는 수량이 필요한 수량 이상인지 확인합니다.
+            if (checkingItem.item.stackable)
+            {
+                return itemSlot.count >= checkingItem.count;
+            }
+
+            // 아이템이 스택 불가능한 경우, 슬롯에 해당 아이템이 존재하면 true를 반환합니다.
+            return true;
+        }
+
+        #region 250324 스크립터블 오브젝트가 자동으로 저장되지 않는 문제 해결을 위한 코드 추가
+        // 인벤토리 저장
+        public void SaveInventory()
+        {
+            // 에셋이 수정되었음을 Unity에 알리기
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(this);  // 수정된 상태를 Unity에 알림
+            AssetDatabase.SaveAssets();  // 에셋에 저장
+            Debug.Log("Inventory saved manually.");
+#endif
+        }
+        #endregion
+
     }
 }

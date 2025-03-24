@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace MyStardewValleylikeGame
@@ -10,6 +13,8 @@ namespace MyStardewValleylikeGame
         protected ItemContainer inventory;  // 인벤토리 데이터 (ScriptableObject)
 
         public List<InventoryButton> inventoryButtons;  // UI 버튼 리스트 (슬롯 역할)
+
+        public List<TextMeshProUGUI> numberTexts;       // 인벤토리 버튼의 넘버링을 표시하는 TextMeshProUGUI 컴포넌트 리스트
         #endregion
 
         private void Awake()
@@ -18,16 +23,56 @@ namespace MyStardewValleylikeGame
             SetIndex();
         }
 
-        private void OnEnable()
+        public virtual void OnEnable()
         {
             // 현재 인벤토리 데이터를 UI에 반영
             Show();
-            inventory.inventoryChanged += Show;  // 인벤토리 변경 시 UI 갱신
+            //inventory.inventoryChanged += Show;  // 인벤토리 변경 시 UI 갱신
         }
 
-        private void OnDisable()
+        private void Start()
         {
-            inventory.inventoryChanged -= Show;  // 이벤트 제거
+            Numbering();
+        }
+
+        public void Numbering()
+        {
+            // 자식 오브젝트에서 "NumberText"라는 이름을 가진 TextMeshProUGUI 컴포넌트들을 가져와 리스트에 저장합니다.
+            numberTexts = GetComponentsInChildren<TextMeshProUGUI>().Where(textBox => textBox.name == "NumberText").ToList();
+
+            // numberTexts 리스트의 각 항목에 대해 순차적으로 처리합니다.
+            for (int i = 0; i < numberTexts.Count; i++)
+            {
+                // 번호를 문자열로 변환하여 텍스트에 설정합니다. (1부터 시작하여 i+1로 설정)
+                numberTexts[i].text = (i + 1).ToString();
+
+                // 9 이상인 인덱스에 대해서 특별한 텍스트 설정을 합니다.
+                if (i >= 9)
+                {
+                    switch (i)
+                    {
+                        // 9번째 인덱스는 "0"으로 설정
+                        case 9:
+                            numberTexts[i].text = "0";
+                            break;
+
+                        // 10번째 인덱스는 "-"로 설정
+                        case 10:
+                            numberTexts[i].text = "-";
+                            break;
+
+                        // 11번째 인덱스는 "="로 설정
+                        case 11:
+                            numberTexts[i].text = "=";
+                            break;
+                    }
+                }
+            }
+        }
+
+        public virtual void OnDisable()
+        {
+            //inventory.inventoryChanged -= Show;  // 이벤트 제거
         }
 
         // 인벤토리 슬롯의 인덱스를 InventoryButton에 설정
@@ -48,7 +93,7 @@ namespace MyStardewValleylikeGame
         }
 
         // UI를 갱신하여 인벤토리 데이터를 반영하는 함수
-        public void Show()
+        public virtual void Show()
         {
             #region 원본
             //for (int i = 0; i < inventory.slots.Count; i++)

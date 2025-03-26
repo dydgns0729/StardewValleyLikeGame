@@ -13,6 +13,9 @@ namespace MyStardewValleylikeGame
 
         public Action<int> onChanged;           // 툴바 변경 시 호출할 이벤트
 
+        [SerializeField] IconHighlight iconHighlight; // 아이콘 하이라이트를 참조하는 변수
+
+
         public Item GetItem                     // 현재 선택된 툴바의 아이템을 가져오는 프로퍼티
         {
             get
@@ -32,6 +35,12 @@ namespace MyStardewValleylikeGame
         #endregion
 
         #endregion
+
+        private void Start()
+        {
+            onChanged += UpdateHighlightIcon;
+            UpdateHighlightIcon(selectedTool);
+        }
 
         private void Update()
         {
@@ -77,6 +86,19 @@ namespace MyStardewValleylikeGame
                     onChanged?.Invoke(selectedTool);
                     break; // 첫 번째로 눌린 키만 처리
                 }
+            }
+        }
+
+        void UpdateHighlightIcon(int id)
+        {
+            Item item = GetItem;
+
+            if (item == null) return;
+
+            iconHighlight.Show = item.iconHighlight;
+            if (item.iconHighlight)
+            {
+                iconHighlight.Set(item.icon);
             }
         }
     }

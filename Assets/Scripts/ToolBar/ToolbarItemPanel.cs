@@ -26,29 +26,6 @@ namespace MyStardewValleylikeGame
             Highlight(0); // 초기 선택된 툴을 표시
 
             Numbering();
-            #region numberTexts 추가
-            //numberTexts = GetComponentsInChildren<TextMeshProUGUI>().Where(textBox => textBox.name == "NumberText").ToList();
-            //for (int i = 0; i < numberTexts.Count; i++)
-            //{
-            //    numberTexts[i].text = (i + 1).ToString();
-            //    if (i >= 9)
-            //    {
-            //        switch (i)
-            //        {
-            //            case 9:
-            //                numberTexts[i].text = "0";
-            //                break;
-            //            case 10:
-            //                numberTexts[i].text = "-";
-            //                break;
-            //            case 11:
-            //                numberTexts[i].text = "=";
-            //                break;
-            //        }
-            //    }
-            //}
-
-            #endregion
         }
 
         public override void OnDisable()

@@ -46,6 +46,9 @@ namespace MyStardewValleylikeGame
         // 주어진 오디오 클립을 재생하는 메서드
         public void Play(AudioClip audioClip)
         {
+            // 오디오 클립이 null이면 아무것도 하지 않음
+            if (audioClip == null) return;
+
             // 사용 가능한 오디오 소스를 가져옴
             AudioSource audioSource = GetFreeAudioSource();
 

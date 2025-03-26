@@ -79,7 +79,7 @@ namespace MyStardewValleylikeGame
             // 타일맵에서 주어진 위치의 타일을 가져옴
             TileBase tile = tilemap.GetTile(gridPosition);
 
-            Debug.Log("TileBase is " + tile); // 찾은 타일 정보를 로그로 출력
+            //Debug.Log("TileBase is " + tile); // 찾은 타일 정보를 로그로 출력
 
             return tile;
         }

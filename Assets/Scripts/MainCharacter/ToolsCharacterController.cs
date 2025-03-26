@@ -21,6 +21,8 @@ namespace MyStardewValleylikeGame
         [SerializeField] float maxDistance = 1.5f;
         // 타일을 클릭하여 수확할 때 실행될 액션. 도구를 사용하여 타일에서 작물을 수확하는 동작을 처리하는 'ToolAction' 객체
         [SerializeField] ToolAction onTilePickup;
+        // 아이콘 하이라이트를 참조하는 변수
+        [SerializeField] IconHighlight iconHighlight;
 
         // 마커 매니저를 참조하는 변수
         [SerializeField] MarkerManager markerManager;
@@ -88,12 +90,14 @@ namespace MyStardewValleylikeGame
             selectable = Vector2.Distance(characterPosition, cameraPosition) < maxDistance;
             // 마커 매니저에 선택 가능 여부를 전달
             markerManager.Show(selectable);
+            iconHighlight.CanSelect = selectable;
         }
 
         // 마커를 표시하는 메서드
         private void Marker()
         {
             markerManager.markedCellPosition = selectedTilePosition;
+            iconHighlight.cellPosition = selectedTilePosition;
         }
 
         // 캐릭터가 도구를 사용하여 상호작용하는 메서드

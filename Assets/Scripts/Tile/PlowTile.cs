@@ -10,6 +10,8 @@ namespace MyStardewValleylikeGame
     {
         // 밭을 갈 수 있는 타일 리스트
         [SerializeField] List<TileBase> canPlow;
+        // 밭을 갈 때 재생할 소리
+        [SerializeField] AudioClip onPlowUsed;
 
         // 밭을 갈 수 있는지 확인하고, 가능하다면 밭을 간다.
         public override bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController, Item item)
@@ -21,9 +23,10 @@ namespace MyStardewValleylikeGame
             {
                 return false;
             }
-            Debug.Log("PlowTile.OnApplyToTileMap");
             // 해당 위치에 밭을 간다.
             tileMapReadController.cropsManager.Plow(gridPosition);
+            // 밭을 갈 때 소리 재생
+            AudioManager.Instance.Play(onPlowUsed);
 
             return true;
         }

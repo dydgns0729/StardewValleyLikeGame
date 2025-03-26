@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 161573276}
   m_Layer: 0
   m_Name: BaseTilemap
-  m_TagString: Untagged
+  m_TagString: BaseTilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2644,9 +2644,10 @@ GameObject:
   - component: {fileID: 797983761}
   - component: {fileID: 797983763}
   - component: {fileID: 797983762}
+  - component: {fileID: 797983764}
   m_Layer: 0
   m_Name: CropsTilemap
-  m_TagString: Untagged
+  m_TagString: CropsTilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2753,6 +2754,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &797983764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797983760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f7fef5482791148934b1dee6847891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plowed: {fileID: 11400000, guid: cd573b6ddb58f604eac42ae6016ec0b8, type: 2}
+  seeded: {fileID: 11400000, guid: 23c48ef130d0a444c8fd5836aa937ed3, type: 2}
+  cropsSpritePrefab: {fileID: 4488719782736431928, guid: 4cb09c761388f75448bbb8f4b87aca7b, type: 3}
+  cropsContainer: {fileID: 11400000, guid: 7796cfad7b1528446a1b0004bc84b4a6, type: 2}
 --- !u!1001 &850432445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3055,6 +3072,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChestObject
       objectReference: {fileID: 0}
+    - target: {fileID: 6546094931842838016, guid: fd6003f678b2caf4c82d9ec395c1725f, type: 3}
+      propertyPath: onOpenAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 36b564bcf75dbf34ba6a8c2a4c8327ca, type: 3}
+    - target: {fileID: 6546094931842838016, guid: fd6003f678b2caf4c82d9ec395c1725f, type: 3}
+      propertyPath: onCloseAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: d69a1f815f419cb428b8fa6aa4e74e8a, type: 3}
     - target: {fileID: 8961938271470075326, guid: fd6003f678b2caf4c82d9ec395c1725f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8

@@ -8,7 +8,8 @@ namespace MyStardewValleylikeGame
     {
         public override bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController, Item item)
         {
-            // 해당 위치에 밭이 갈려있는지 확인
+            Debug.Log("SeedTile OnApplyToTileMap");
+            // 해당 위치에 밭이 갈려있는지 / 씨앗이 심어져 있는지 확인
             if (!tileMapReadController.cropsManager.Check(gridPosition)) return false;
             // 해당 위치에 씨앗을 심는다.
             tileMapReadController.cropsManager.Seed(gridPosition, item.crop);

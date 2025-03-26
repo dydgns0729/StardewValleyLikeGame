@@ -137,7 +137,7 @@ namespace MyStardewValleylikeGame
             inventoryChanged?.Invoke(); // UI 업데이트
         }
 
-        internal bool CheckFreeSpace()
+        public bool CheckFreeSpace()
         {
             // slots 리스트를 순회하여 각 슬롯의 아이템이 비어 있는지 확인합니다.
             for (int i = 0; i < slots.Count; i++)
@@ -152,7 +152,7 @@ namespace MyStardewValleylikeGame
             return false;
         }
 
-        internal bool CheckItem(ItemSlot checkingItem)
+        public bool CheckItem(ItemSlot checkingItem)
         {
             // slots 리스트에서 checkingItem과 동일한 아이템을 가진 슬롯을 찾습니다.
             ItemSlot itemSlot = slots.Find(slot => slot.item == checkingItem.item);

@@ -39,7 +39,7 @@ namespace MyStardewValleylikeGame
             oldCellPosition = markedCellPosition;
         }
 
-        internal void Show(bool selectable)
+        public void Show(bool selectable)
         {
             show = selectable;
             targetTilemap.gameObject.SetActive(show);

@@ -33,7 +33,7 @@ namespace MyStardewValleylikeGame
         }
 
         // 외부에서 호출하여 특정 Transform을 목표 위치(destination)로 이동시키는 메서드
-        internal void InitiateTransition(Transform toTransition)
+        public void InitiateTransition(Transform toTransition)
         {
             //Cinemachine.CinemachineBrain currentCamera = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
 

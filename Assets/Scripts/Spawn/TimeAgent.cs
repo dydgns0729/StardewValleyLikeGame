@@ -26,9 +26,10 @@ namespace MyStardewValleylikeGame
             // 게임 매니저의 시간 컨트롤러에 이 클래스를 등록
             isSubscribed = true;
             GameManager.Instance.dayTimeController.Subscribe(this);
+
         }
 
-        private void OnDestroy()
+        public virtual void OnDestroy()
         {
             if (!isSubscribed) return;
             // 게임 매니저의 시간 컨트롤러에 이 클래스를 등록 해제

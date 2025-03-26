@@ -22,6 +22,19 @@ namespace MyStardewValleylikeGame
         /// <returns>그리드 셀 위치 (Vector3Int)</returns>
         public Vector3Int GetGridPosition(Vector2 position, bool mousePosition = false)
         {
+            if (tilemap == null)
+            {
+                // tilemap이 null이면 "BaseTilemap" 태그를 가진 GameObject를 찾아서 Tilemap 컴포넌트를 할당
+                tilemap = GameObject.FindWithTag("BaseTilemap").GetComponent<Tilemap>();
+            }
+
+            if (tilemap == null)
+            {
+                // 만약 여전히 tilemap이 null이라면, 에러 메시지를 출력하고 Vector3Int.zero(0, 0, 0)을 반환
+                Debug.LogError("Tilemap is null");
+                return Vector3Int.zero;  // 유효한 Tilemap이 없으면 기본값(0, 0, 0)을 반환
+            }
+
             Vector3 worldPosition;
 
             if (mousePosition)
@@ -50,10 +63,23 @@ namespace MyStardewValleylikeGame
         /// <returns>해당 위치의 TileBase (없으면 null)</returns>
         public TileBase GetTileBase(Vector3Int gridPosition)
         {
+            if (tilemap == null)
+            {
+                // tilemap이 null이면 "BaseTilemap" 태그를 가진 GameObject를 찾아서 Tilemap 컴포넌트를 할당
+                tilemap = GameObject.FindWithTag("BaseTilemap").GetComponent<Tilemap>();
+            }
+
+            if (tilemap == null)
+            {
+                // 만약 여전히 tilemap이 null이라면, 에러 메시지를 출력하고 NULL을 반환
+                Debug.LogError("Tilemap is null");
+                return null;  // 유효한 Tilemap이 없으면 NULL 반환
+            }
+
             // 타일맵에서 주어진 위치의 타일을 가져옴
             TileBase tile = tilemap.GetTile(gridPosition);
 
-            //Debug.Log("TileBase is " + tile); // 찾은 타일 정보를 로그로 출력
+            Debug.Log("TileBase is " + tile); // 찾은 타일 정보를 로그로 출력
 
             return tile;
         }

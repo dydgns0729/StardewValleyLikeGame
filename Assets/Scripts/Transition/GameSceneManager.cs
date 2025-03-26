@@ -64,7 +64,8 @@ namespace MyStardewValleylikeGame
 
             // 한 프레임을 기다림 (씬이 로드되기 전까지 대기)
             yield return new WaitForEndOfFrame();
-
+            //새로 로드된 씬을 활성화
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(currentScene));
             // 화면 틴트 해제
             screenTint.UnTint();
 

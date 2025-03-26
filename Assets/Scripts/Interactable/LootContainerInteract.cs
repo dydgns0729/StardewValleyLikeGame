@@ -9,17 +9,25 @@ namespace MyStardewValleylikeGame
         #region Variables
         [SerializeField] GameObject openedChest;
         [SerializeField] GameObject closedChest;
-        [SerializeField] bool isOpen;
+        [SerializeField] bool isOpen = false;
+        [SerializeField] AudioClip onOpenAudio;
+        [SerializeField] AudioClip onCloseAudio;
         #endregion
 
         public override void Interact()
         {
-            if(!isOpen)
+            isOpen = !isOpen;
+            openedChest.SetActive(isOpen);
+            closedChest.SetActive(!isOpen);
+            if (isOpen)
             {
-                isOpen = true;
-                closedChest.SetActive(false);
-                openedChest.SetActive(true);
+                AudioManager.Instance.Play(onOpenAudio);
             }
+            else
+            {
+                AudioManager.Instance.Play(onCloseAudio);
+            }
+
         }
     }
 }

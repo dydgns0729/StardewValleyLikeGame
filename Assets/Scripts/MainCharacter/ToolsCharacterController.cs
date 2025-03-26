@@ -155,6 +155,7 @@ namespace MyStardewValleylikeGame
                 {
                     if (item.onItemUsed != null)
                     {
+                        Debug.Log("Item Used");
                         // 아이템 사용 메서드 실행
                         item.onItemUsed.OnItemUsed(item, GameManager.Instance.inventoryContainer);
                     }

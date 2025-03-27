@@ -12,6 +12,8 @@ namespace MyStardewValleylikeGame
 
         // 작물 관리자를 참조하는 변수
         public CropsManager cropsManager;
+
+        public PlaceableObjectsReferenceManager placeableObjectsManager;
         #endregion
 
         /// <summary>

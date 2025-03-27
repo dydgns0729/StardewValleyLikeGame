@@ -51,6 +51,7 @@ namespace MyStardewValleylikeGame
         public void SetSelectedTool(int id)
         {
             selectedTool = id;
+            onChanged?.Invoke(selectedTool);
         }
 
         private void CheckNumberWheel()
@@ -70,8 +71,7 @@ namespace MyStardewValleylikeGame
                     selectedTool -= 1; // 이전 슬롯으로 이동
                     selectedTool = (selectedTool < 0) ? toolbarSize - 1 : selectedTool; // 처음에서 뒤로 가면 마지막으로
                 }
-                //Debug.Log("셀렉트" + selectedTool);
-                onChanged?.Invoke(selectedTool); // 변경 이벤트 호출
+                SetSelectedTool(selectedTool);
             }
         }
 
@@ -83,22 +83,31 @@ namespace MyStardewValleylikeGame
                 if (Input.GetKeyDown(kvp.Key))
                 {
                     selectedTool = kvp.Value;
-                    onChanged?.Invoke(selectedTool);
                     break; // 첫 번째로 눌린 키만 처리
                 }
             }
+            SetSelectedTool(selectedTool);
         }
 
+        // 하이라이트 아이콘을 업데이트하는 메서드
         void UpdateHighlightIcon(int id)
         {
+            // 현재 아이템을 가져옴
             Item item = GetItem;
+            // 아이템이 없으면 하이라이트를 숨기고 종료
+            if (item == null)
+            {
+                iconHighlight.Set(null); // 아이콘을 비움
+                return;
+            }
 
-            if (item == null) return;
-
+            // 하이라이트 표시 여부 설정
             iconHighlight.Show = item.iconHighlight;
+
+            // 아이템이 하이라이트 표시 상태이면 해당 아이콘으로 설정
             if (item.iconHighlight)
             {
-                iconHighlight.Set(item.icon);
+                iconHighlight.Set(item.icon); // 하이라이트 아이콘 설정
             }
         }
     }

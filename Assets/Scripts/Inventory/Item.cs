@@ -12,9 +12,7 @@ namespace MyStardewValleylikeGame
         public ToolAction onTileMapAction; //아이템 사용 시 실행할 타일맵 도구 액션
         public ToolAction onItemUsed; //아이템 사용 시 실행할 아이템 사용 액션
         public Crop crop;           //작물 정보
-
-        #region 25 03 26 
-        public bool iconHighlight;
-        #endregion
+        public bool iconHighlight;  //월드맵에 아이콘 하이라이트 표시 여부
+        public GameObject itemPrefab; //설치아이템 프리팹
     }
 }

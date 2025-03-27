@@ -37,14 +37,16 @@ namespace MyStardewValleylikeGame
 
         public override void OnClick(int id)
         {
+            Debug.Log("ToolbarItemPanel.OnClick() 1");
             // 드래그 앤 드롭 중인 아이템이 있는 경우
             if (GameManager.Instance.dragAndDropController.IsItemClicked)
             {
+                Debug.Log("ToolbarItemPanel.OnClick() 2");
                 // 드래그 앤 드롭 컨트롤러의 클릭 처리 메서드 호출
                 GameManager.Instance.dragAndDropController.OnClick(inventory.slots[id]);
                 return;
             }
-
+            Debug.Log("ToolbarItemPanel.OnClick() 3");
             // 툴바 컨트롤러에 선택된 툴의 인덱스를 설정
             toolbarController.SetSelectedTool(id);
             // 선택된 아이템을 표시

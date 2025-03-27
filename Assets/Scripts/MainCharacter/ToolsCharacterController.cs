@@ -78,7 +78,11 @@ namespace MyStardewValleylikeGame
         // 타일의 위치벡터값을 가져옴
         private void SelectTile()
         {
-            selectedTilePosition = tileMapReadController.GetGridPosition(Input.mousePosition, true);
+            if (selectable)
+            {
+                // 마우스 위치를 기준으로 타일의 위치벡터값을 가져옴
+                selectedTilePosition = tileMapReadController.GetGridPosition(Input.mousePosition, true);
+            }
         }
 
         // 타일 선택이 가능한지 확인하는 메서드
@@ -90,6 +94,7 @@ namespace MyStardewValleylikeGame
             selectable = Vector2.Distance(characterPosition, cameraPosition) < maxDistance;
             // 마커 매니저에 선택 가능 여부를 전달
             markerManager.Show(selectable);
+            // 아이콘 하이라이트에 선택 가능 여부를 전달
             iconHighlight.CanSelect = selectable;
         }
 

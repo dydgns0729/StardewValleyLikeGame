@@ -14,6 +14,9 @@ namespace MyStardewValleylikeGame
         {
             // 타일의 위치(gridPosition)를 기준으로, cropsManager에서 PickUp 메서드를 호출하여 해당 타일에서 작물을 수확합니다.
             tileMapReadController.cropsManager.PickUp(gridPosition);
+            // 타일의 위치(gridPosition)를 기준으로, placeableObjectsManager에서 PickUp 메서드를 호출하여 해당 타일에서 오브젝트를 회수합니다.
+            tileMapReadController.placeableObjectsManager.PickUp(gridPosition);
+
 
             return true;
         }

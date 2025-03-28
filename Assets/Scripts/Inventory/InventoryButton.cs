@@ -71,12 +71,22 @@ namespace MyStardewValleylikeGame
         // 드래그 시작 이벤트 처리 메서드
         public void OnBeginDrag(PointerEventData eventData)
         {
-            // 현재 슬롯이 비어있으면 리턴
-            if (gameManager.inventoryContainer.slots[myIndex].item == null) return;
-            // 드래그 앤 드롭 컨트롤러의 드래그 시작 메서드 호출
-            gameManager.dragAndDropController.OnDragStart(gameManager.inventoryContainer.slots[myIndex]);
-            // 인벤토리 패널을 최신화
-            transform.parent.GetComponent<ItemPanel>().Show();
+            #region 250328 인벤토리 별로 드래그 관리
+            // 부모 오브젝트에서 ItemPanel 컴포넌트를 가져옵니다.
+            ItemPanel itemPanel = transform.parent.GetComponent<ItemPanel>();
+
+            itemPanel.OnDragStart(myIndex);
+            #endregion
+
+
+            #region 인벤토리 별로 드래그 관리를 위한 주석
+            //// 현재 슬롯이 비어있으면 리턴
+            //if (gameManager.inventoryContainer.slots[myIndex].item == null) return;
+            //// 드래그 앤 드롭 컨트롤러의 드래그 시작 메서드 호출
+            //gameManager.dragAndDropController.OnDragStart(gameManager.inventoryContainer.slots[myIndex]);
+            //// 인벤토리 패널을 최신화
+            //transform.parent.GetComponent<ItemPanel>().Show();
+            #endregion
         }
 
         // 드래그 중 이벤트 처리 메서드 (현재는 빈 메서드)
@@ -94,12 +104,21 @@ namespace MyStardewValleylikeGame
         // 드롭 이벤트 처리 메서드
         public void OnDrop(PointerEventData eventData)
         {
-            // 드래그 중이 아니면 리턴
-            if (!gameManager.dragAndDropController.isDraging) return;
-            // 드래그 앤 드롭 컨트롤러의 인벤토리에 드롭 메서드 호출
-            gameManager.dragAndDropController.DropInInventoryUI(gameManager.inventoryContainer.slots[myIndex]);
-            // 인벤토리 패널을 최신화
-            transform.parent.GetComponent<ItemPanel>().Show();
+            #region 250328 인벤토리 별로 드래그 관리
+            // 부모 오브젝트에서 ItemPanel 컴포넌트를 가져옵니다.
+            ItemPanel itemPanel = transform.parent.GetComponent<ItemPanel>();
+
+            itemPanel.OnDragEnd(myIndex);
+            #endregion
+
+            #region 인벤토리 별로 드래그 관리를 위한 주석
+            //// 드래그 중이 아니면 리턴
+            //if (!gameManager.dragAndDropController.isDraging) return;
+            //// 드래그 앤 드롭 컨트롤러의 인벤토리에 드롭 메서드 호출
+            //gameManager.dragAndDropController.DropInInventoryUI(gameManager.inventoryContainer.slots[myIndex]);
+            //// 인벤토리 패널을 최신화
+            //transform.parent.GetComponent<ItemPanel>().Show();
+            #endregion
         }
         #endregion
     }

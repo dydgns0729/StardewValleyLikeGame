@@ -11,6 +11,8 @@ namespace MyStardewValleylikeGame
         // 타일맵에 이 도구 행동을 적용할 때 호출되는 메서드
         public override bool OnApplyToTileMap(Vector3Int gridPosition, TileMapReadController tileMapReadController, Item item)
         {
+            // 해당 위치에 이미 오브젝트가 있는지 확인
+            if (tileMapReadController.placeableObjectsManager.Check(gridPosition)) return false;
             // 지정된 위치에 아이템을 설치
             tileMapReadController.placeableObjectsManager.Place(item, gridPosition);
 
@@ -18,8 +20,10 @@ namespace MyStardewValleylikeGame
             return true;
         }
 
+        // 아이템 사용 시 호출되는 메서드
         public override void OnItemUsed(Item item, ItemContainer itemContainer)
         {
+            // 아이템 사용 시 아이템 컨테이너에서 아이템 제거
             itemContainer.Remove(item);
         }
     }

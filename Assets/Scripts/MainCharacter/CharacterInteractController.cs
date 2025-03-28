@@ -7,14 +7,16 @@ namespace MyStardewValleylikeGame
         #region Variables
 
         // 캐릭터 컨트롤러 스크립트를 참조하는 변수
-        CharacterController2D character;
+        CharacterController2D characterController;
         // Rigidbody2D 컴포넌트를 참조하는 변수
         Rigidbody2D rgbd2d;
+
+        Character character; // Character 스크립트 참조 변수
 
         // 상호작용할 위치의 오프셋 거리
         [SerializeField] float offsetDistance = 1f;
         // 상호작용 가능한 영역의 크기
-        [SerializeField] float sizeOfInteractableArea = 1.2f;
+        [SerializeField] float sizeOfInteractableArea = 1f;
 
         [SerializeReference] HighlightController highlightController; // HighlightController 스크립트 참조 변수
 
@@ -24,8 +26,9 @@ namespace MyStardewValleylikeGame
         private void Awake()
         {
             // 캐릭터 컨트롤러와 Rigidbody2D 컴포넌트를 가져옴
-            character = GetComponent<CharacterController2D>();
+            characterController = GetComponent<CharacterController2D>();
             rgbd2d = GetComponent<Rigidbody2D>();
+            character = GetComponent<Character>();
         }
 
         // 매 프레임마다 호출되는 메서드
@@ -46,7 +49,7 @@ namespace MyStardewValleylikeGame
         private void CheckToHighlight()
         {
             // 캐릭터의 위치에서 오프셋 거리만큼 떨어진 위치를 계산
-            Vector2 position = rgbd2d.position + character.lastMotionVector * offsetDistance;
+            Vector2 position = rgbd2d.position + characterController.lastMotionVector * offsetDistance;
 
             // 해당 위치에서 주어진 반경 내에 있는 모든 Collider2D 객체를 감지
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, sizeOfInteractableArea);
@@ -70,7 +73,7 @@ namespace MyStardewValleylikeGame
         private void Interact()
         {
             // 캐릭터의 위치에서 오프셋 거리만큼 떨어진 위치를 계산
-            Vector2 position = rgbd2d.position + character.lastMotionVector * offsetDistance;
+            Vector2 position = rgbd2d.position + characterController.lastMotionVector * offsetDistance;
 
             // 지정된 위치에서 상호작용 가능한 객체들을 감지
             Collider2D[] colliders = Physics2D.OverlapCircleAll(position, sizeOfInteractableArea);
@@ -83,7 +86,7 @@ namespace MyStardewValleylikeGame
                 // 객체가 Interactable 컴포넌트를 가지고 있다면 Interact 메서드를 호출하고 반복문 종료
                 if (hit != null)
                 {
-                    hit.Interact();
+                    hit.Interact(character);
                     break;
                 }
             }

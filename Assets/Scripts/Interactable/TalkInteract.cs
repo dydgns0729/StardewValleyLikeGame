@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace MyStardewValleylikeGame
 {
@@ -13,7 +14,7 @@ namespace MyStardewValleylikeGame
         /// <summary>
         /// 플레이어가 NPC와 상호작용할 때 실행되는 메서드
         /// </summary>
-        public override void Interact()
+        public override void Interact(Character character)
         {
             // GameManager의 대화 시스템을 통해 대화를 시작
             GameManager.Instance.dialogueSystem.Initialize(dialogue);

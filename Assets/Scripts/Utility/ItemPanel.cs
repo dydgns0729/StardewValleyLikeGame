@@ -9,8 +9,7 @@ namespace MyStardewValleylikeGame
     public class ItemPanel : MonoBehaviour
     {
         #region Variables
-        [SerializeField]
-        protected ItemContainer inventory;  // 인벤토리 데이터 (ScriptableObject)
+        public ItemContainer inventory;  // 인벤토리 데이터 (ScriptableObject)
 
         public List<InventoryButton> inventoryButtons;  // UI 버튼 리스트 (슬롯 역할)
 
@@ -109,8 +108,7 @@ namespace MyStardewValleylikeGame
             //    }
             //}
             #endregion
-
-            for (int i = 0; i < inventoryButtons.Count; i++)
+            for (int i = 0; i < inventory.slots.Count && i < inventoryButtons.Count; i++)
             {
                 // 인벤토리 슬롯에 아이템이 존재하는 경우
                 if (inventory.slots[i].item != null)
@@ -125,6 +123,16 @@ namespace MyStardewValleylikeGame
         }
 
         public virtual void OnClick(int id)
+        {
+
+        }
+
+        public virtual void OnDragStart(int id)
+        {
+
+        }
+
+        public virtual void OnDragEnd(int id)
         {
 
         }

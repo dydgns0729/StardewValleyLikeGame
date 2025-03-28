@@ -18,6 +18,18 @@ namespace MyStardewValleylikeGame
             Show();
         }
 
+        public override void OnDragStart(int id)
+        {
+            GameManager.Instance.dragAndDropController.OnDragStart(inventory.slots[id]);
+            Show();
+        }
+
+        public override void OnDragEnd(int id)
+        {
+            GameManager.Instance.dragAndDropController.DropInInventoryUI(inventory.slots[id]);
+            Show();
+        }
+
         public override void OnDisable()
         {
             base.OnDisable();

@@ -8,7 +8,7 @@ namespace MyStardewValleylikeGame
     {
         #region Variables
         [SerializeField] private GameObject itemIcon;   // 아이템 아이콘을 나타내는 GameObject
-        private ItemSlot itemSlot = new ItemSlot();     // 드래그 및 드롭을 위한 현재 아이템 슬롯
+        public ItemSlot itemSlot;     // 드래그 및 드롭을 위한 현재 아이템 슬롯
         private RectTransform iconTransform;            // 아이콘의 RectTransform (UI 위치 및 크기)
         private Image itemIconImage;                    // 아이콘의 이미지 컴포넌트
         public bool isDraging = false;                  // 드래그 중인지 여부를 나타내는 플래그
@@ -19,6 +19,7 @@ namespace MyStardewValleylikeGame
 
         private void Start()
         {
+            itemSlot = new ItemSlot(); // 아이템 슬롯 초기화
             //참조 변수
             iconTransform = itemIcon.GetComponent<RectTransform>();
             itemIconImage = itemIcon.GetComponent<Image>();
@@ -40,6 +41,16 @@ namespace MyStardewValleylikeGame
             }
         }
 
+        public bool Check(Item item, int count = 1)
+        {
+            if (item.stackable)
+            {
+                return itemSlot.item == item && itemSlot.count >= count;
+            }
+
+            return itemSlot.item == item;
+        }
+
         // 슬롯 클릭 시 호출되는 메서드
         public void OnClick(ItemSlot clickedSlot)
         {
@@ -51,10 +62,22 @@ namespace MyStardewValleylikeGame
             }
             else // 현재 슬롯에 아이템이 있을 경우
             {
-                Item tempItem = clickedSlot.item;  // 클릭한 슬롯의 아이템을 임시 변수에 저장
-                int tempCount = clickedSlot.count; // 클릭한 슬롯의 아이템 개수를 임시 변수에 저장
-                clickedSlot.Copy(itemSlot);        // 현재 슬롯의 아이템 정보를 클릭한 슬롯으로 복사
-                itemSlot.Set(tempItem, tempCount); // 임시 변수의 아이템 정보를 현재 슬롯에 설정
+                if (this.itemSlot.item == clickedSlot.item)
+                {
+                    if (this.itemSlot.item.stackable)
+                    {
+                        this.itemSlot.count += clickedSlot.count;
+                        clickedSlot.Clear();
+                    }
+                }
+                else
+                {
+                    Item tempItem = clickedSlot.item;  // 클릭한 슬롯의 아이템을 임시 변수에 저장
+                    int tempCount = clickedSlot.count; // 클릭한 슬롯의 아이템 개수를 임시 변수에 저장
+                    clickedSlot.Copy(itemSlot);        // 현재 슬롯의 아이템 정보를 클릭한 슬롯으로 복사
+                    itemSlot.Set(tempItem, tempCount); // 임시 변수의 아이템 정보를 현재 슬롯에 설정
+                }
+
             }
             UpdateIcon();                          // 아이콘 업데이트 메서드 호출
             #region 인벤토리와 툴바가 같이 활성화시 사용 추후 수정시 삭제 필
@@ -100,6 +123,25 @@ namespace MyStardewValleylikeGame
             ItemSpawnManager.Instance.SpawnItem(worldPosition, itemSlot.item, itemSlot.count);  // 아이템을 월드에 드롭
             itemSlot.Clear();                                                                   // 현재 슬롯 비우기
             UpdateIcon();                                                                       // 아이콘 업데이트 메서드 호출
+        }
+
+        internal void RemoveItem(int count = 1)
+        {
+            if (itemSlot == null) return;
+
+            if (itemSlot.item.stackable)
+            {
+                itemSlot.count -= count;
+                if (itemSlot.count <= 0)
+                {
+                    itemSlot.Clear();
+                }
+            }
+            else
+            {
+                itemSlot.Clear();
+            }
+            UpdateIcon();
         }
         #endregion
     }

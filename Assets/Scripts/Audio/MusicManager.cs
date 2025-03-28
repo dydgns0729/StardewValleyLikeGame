@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MyStardewValleylikeGame
 {
     // MusicManager는 게임의 배경 음악을 제어하는 싱글톤 클래스입니다.
-    public class MusicManager : PersistentSingleton<MusicManager>
+    public class MusicManager : Singleton<MusicManager>
     {
         #region Variables
         // 배경 음악을 재생할 AudioSource

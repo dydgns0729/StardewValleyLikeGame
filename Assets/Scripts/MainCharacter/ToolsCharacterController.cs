@@ -142,7 +142,7 @@ namespace MyStardewValleylikeGame
             {
                 // 툴바 컨트롤러에서 현재 선택된 아이템을 가져옴
                 Item item = toolbarController.GetItem;
-                // 아이템이 없다면 false 반환
+                // 아이템이 없다면 반환
                 if (item == null)
                 {
                     if (onTilePickup != null)   // 타일 수확 액션이 설정되어 있다면
@@ -152,7 +152,7 @@ namespace MyStardewValleylikeGame
                     }
                     return;
                 }
-                // 아이템에 타일맵 액션 메서드가 없다면 false 반환
+                // 아이템에 타일맵 액션 메서드가 없다면 반환
                 if (item.onTileMapAction == null) return;
 
                 // 애니메이션 트리거를 실행

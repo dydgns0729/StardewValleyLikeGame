@@ -16,10 +16,9 @@ namespace MyStardewValleylikeGame
         #endregion
 
         // 생성자: 설치 아이템, 오브젝트, 위치를 초기화
-        public PlaceableObject(Item item, Transform target, Vector3Int pos)
+        public PlaceableObject(Item item, Vector3Int pos)
         {
             placedItem = item;
-            targetObject = target;
             positionOnGrid = pos;
         }
     }
@@ -31,5 +30,19 @@ namespace MyStardewValleylikeGame
         #region Variables
         public List<PlaceableObject> placeableObjects; // 설치 가능한 오브젝트 리스트
         #endregion
+
+        // 지정된 그리드 위치에 해당하는 PlaceableObject를 반환하는 메서드
+        internal PlaceableObject Get(Vector3Int position)
+        {
+            // 리스트에서 주어진 위치에 해당하는 PlaceableObject를 찾음
+            return placeableObjects.Find(x => x.positionOnGrid == position);
+        }
+
+        // 주어진 PlaceableObject를 리스트에서 제거하는 메서드
+        internal void Remove(PlaceableObject placedObject)
+        {
+            // 리스트에서 해당 오브젝트를 제거
+            placeableObjects.Remove(placedObject);
+        }
     }
 }

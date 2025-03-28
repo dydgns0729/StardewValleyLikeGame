@@ -6,7 +6,7 @@ using UnityEngine;
 namespace MyStardewValleylikeGame
 {
     // AudioManager는 게임 내에서 오디오를 관리하는 싱글톤 클래스입니다.
-    public class AudioManager : PersistentSingleton<AudioManager>
+    public class AudioManager : Singleton<AudioManager>
     {
         #region Variables
         // 오디오 소스를 생성할 프리팹

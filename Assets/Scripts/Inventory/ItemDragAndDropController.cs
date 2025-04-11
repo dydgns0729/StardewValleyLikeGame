@@ -68,7 +68,8 @@ namespace MyStardewValleylikeGame
                     if (this.itemSlot.item.stackable)  // 스택 가능한 아이템이면
                     {
                         this.itemSlot.count += clickedSlot.count;  // 수량 합치기
-                        clickedSlot.Clear();                       // 클릭한 슬롯 비우기
+                        clickedSlot.Copy(itemSlot); // 클릭한 슬롯에 현재 슬롯의 아이템과 개수 설정
+                        itemSlot.Clear(); // 마우스 아이템 슬롯 비우기
                     }
                 }
                 else  // 아이템이 다른 경우

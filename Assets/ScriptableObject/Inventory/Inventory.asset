@@ -15,30 +15,30 @@ MonoBehaviour:
   slots:
   - item: {fileID: 11400000, guid: b4838e0805faee342b37d152f51580c6, type: 2}
     count: 3
-  - item: {fileID: 11400000, guid: 9cb8db3267c6e2645bdf04360bd5033b, type: 2}
-    count: 1
-  - item: {fileID: 11400000, guid: fcde621483d6e85438575241975c8c3a, type: 2}
-    count: 1
   - item: {fileID: 11400000, guid: 1dfd58d113dc73e4489391f85e7aa2b5, type: 2}
     count: 1
-  - item: {fileID: 11400000, guid: d0babe16699302240988e84d7dd53495, type: 2}
-    count: 967
-  - item: {fileID: 11400000, guid: bfdb06c645cbc2941b76a3f1b09341d4, type: 2}
-    count: 62
-  - item: {fileID: 11400000, guid: ec855a971611d444ba966367e0a44a4d, type: 2}
-    count: 459
+  - item: {fileID: 11400000, guid: f9e30843e447f924e81d83b71cf76d9f, type: 2}
+    count: 2
   - item: {fileID: 0}
     count: 0
-  - item: {fileID: 11400000, guid: 785411ea24f9a9847822610b98546032, type: 2}
-    count: 925
-  - item: {fileID: 11400000, guid: 6299b0e11ae83c745a08af1a1732d453, type: 2}
-    count: 19
-  - item: {fileID: 11400000, guid: f9e30843e447f924e81d83b71cf76d9f, type: 2}
-    count: 45
-  - item: {fileID: 11400000, guid: 20be4d77cbc9dc84ab0b530832b8bb0c, type: 2}
-    count: 1
-  - item: {fileID: 11400000, guid: c1ff1152f1ab6ac46a0a223bf0ac2a85, type: 2}
-    count: 1
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
+  - item: {fileID: 0}
+    count: 0
   - item: {fileID: 0}
     count: 0
   - item: {fileID: 0}

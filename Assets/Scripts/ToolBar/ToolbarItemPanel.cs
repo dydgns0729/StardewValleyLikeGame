@@ -53,6 +53,19 @@ namespace MyStardewValleylikeGame
             Highlight(id);
         }
 
+        public override void OnDragStart(int id)
+        {
+            GameManager.Instance.dragAndDropController.OnDragStart(inventory.slots[id]);
+            Show();
+        }
+
+        public override void OnDragEnd(int id)
+        {
+            GameManager.Instance.dragAndDropController.DropInInventoryUI(inventory.slots[id]);
+            Show();
+        }
+
+
         // 툴바에 현재 선택된 아이템을 표시하는 메서드
         public void Highlight(int id)
         {

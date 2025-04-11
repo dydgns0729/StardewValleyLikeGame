@@ -21,8 +21,8 @@ namespace MyStardewValleylikeGame
         {
             itemSlot = new ItemSlot(); // 아이템 슬롯 초기화
             //참조 변수
-            iconTransform = itemIcon.GetComponent<RectTransform>();
-            itemIconImage = itemIcon.GetComponent<Image>();
+            iconTransform = itemIcon.GetComponent<RectTransform>();  // 아이콘의 RectTransform 참조
+            itemIconImage = itemIcon.GetComponent<Image>();          // 아이콘 이미지 컴포넌트 참조
         }
 
         private void Update()
@@ -41,14 +41,15 @@ namespace MyStardewValleylikeGame
             }
         }
 
+        // 아이템이 변환 가능한지 확인하는 메서드
         public bool Check(Item item, int count = 1)
         {
-            if (item.stackable)
+            if (item.stackable)  // 아이템이 스택 가능하면
             {
-                return itemSlot.item == item && itemSlot.count >= count;
+                return itemSlot.item == item && itemSlot.count >= count;  // 아이템이 같고 수량이 충분한지 체크
             }
 
-            return itemSlot.item == item;
+            return itemSlot.item == item;  // 아이템이 같으면 true
         }
 
         // 슬롯 클릭 시 호출되는 메서드
@@ -62,29 +63,32 @@ namespace MyStardewValleylikeGame
             }
             else // 현재 슬롯에 아이템이 있을 경우
             {
-                if (this.itemSlot.item == clickedSlot.item)
+                if (this.itemSlot.item == clickedSlot.item)  // 같은 아이템이면
                 {
-                    if (this.itemSlot.item.stackable)
+                    if (this.itemSlot.item.stackable)  // 스택 가능한 아이템이면
                     {
-                        this.itemSlot.count += clickedSlot.count;
-                        clickedSlot.Clear();
+                        this.itemSlot.count += clickedSlot.count;  // 수량 합치기
+                        clickedSlot.Clear();                       // 클릭한 슬롯 비우기
                     }
                 }
-                else
+                else  // 아이템이 다른 경우
                 {
-                    Item tempItem = clickedSlot.item;  // 클릭한 슬롯의 아이템을 임시 변수에 저장
-                    int tempCount = clickedSlot.count; // 클릭한 슬롯의 아이템 개수를 임시 변수에 저장
-                    clickedSlot.Copy(itemSlot);        // 현재 슬롯의 아이템 정보를 클릭한 슬롯으로 복사
-                    itemSlot.Set(tempItem, tempCount); // 임시 변수의 아이템 정보를 현재 슬롯에 설정
+                    SetItem(clickedSlot);
                 }
 
             }
             UpdateIcon();                          // 아이콘 업데이트 메서드 호출
             #region 인벤토리와 툴바가 같이 활성화시 사용 추후 수정시 삭제 필
-
             GameManager.Instance.inventoryContainer.inventoryChanged?.Invoke(); // 인벤토리 변경 이벤트 호출
-
             #endregion
+        }
+
+        private void SetItem(ItemSlot clickedSlot)
+        {
+            Item tempItem = clickedSlot.item;  // 클릭한 슬롯의 아이템을 임시 변수에 저장
+            int tempCount = clickedSlot.count; // 클릭한 슬롯의 아이템 개수를 임시 변수에 저장
+            clickedSlot.Copy(itemSlot);        // 현재 슬롯의 아이템 정보를 클릭한 슬롯으로 복사
+            itemSlot.Set(tempItem, tempCount); // 임시 변수의 아이템 정보를 현재 슬롯에 설정
         }
 
         // 아이콘 업데이트 메서드
@@ -93,6 +97,7 @@ namespace MyStardewValleylikeGame
             itemIcon.SetActive(itemSlot.item != null);                            // 현재 슬롯에 아이템이 없으면 아이콘 비활성화, 있으면 활성화
             if (itemSlot.item != null) itemIconImage.sprite = itemSlot.item.icon; // 아이콘 이미지 설정
         }
+
         #region 드래그 앤 드롭 기능 구현
         // 드래그 시작 시 호출되는 메서드
         public void OnDragStart(ItemSlot draggedSlot)
@@ -125,23 +130,24 @@ namespace MyStardewValleylikeGame
             UpdateIcon();                                                                       // 아이콘 업데이트 메서드 호출
         }
 
+        // 아이템을 제거하는 메서드
         internal void RemoveItem(int count = 1)
         {
             if (itemSlot == null) return;
 
-            if (itemSlot.item.stackable)
+            if (itemSlot.item.stackable)  // 스택 가능한 아이템이면
             {
-                itemSlot.count -= count;
-                if (itemSlot.count <= 0)
+                itemSlot.count -= count;  // 아이템 수량 감소
+                if (itemSlot.count <= 0)  // 수량이 0 이하가 되면
                 {
-                    itemSlot.Clear();
+                    itemSlot.Clear();    // 슬롯 비우기
                 }
             }
-            else
+            else  // 스택 불가능한 아이템이면
             {
-                itemSlot.Clear();
+                itemSlot.Clear();  // 슬롯 비우기
             }
-            UpdateIcon();
+            UpdateIcon();  // 아이콘 업데이트
         }
         #endregion
     }
